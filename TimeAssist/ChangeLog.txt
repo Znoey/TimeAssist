@@ -1,0 +1,43 @@
+﻿TimeAssist Change Log
+
+TOC
+1.) History
+2.) Planned Features
+
+[1 History]
+
+** 2.0 **
+* Integrated into TimeSheet.
+
+** 1.3 **
+* Editing records in app.
+* Time Corrections 
+* Combining the same tasks and comments into one record with multiple comments or long comment strings.
+
+** 1.2 **
+* Short alarm feature or Notifications.
+
+** 1.1 **
+* Displaying pie chart with data.
+* Adding and commenting on tasks more fluid.
+* Sorted the display on the main form and in the pie chart form.
+
+** 1.0 **
+* Saving and Loading xml data.
+* Able to add task and comments with time stamps.
+* Display records to user.
+
+[2 Planned Features]
+* Short Alarm or Notifications
+	- User able to add a short alarm for a specific amount of time that has passed.
+	- Add a toolbar for the alarm system and for adding / editing tasks
+* Time corrections
+	- for matching up 8 hours in a day.
+	- taking too long on a task.
+	- Correcting time during lunch hours.
+	- Correcting time during break sections of our day.
+* Edit records directly in app.
+* Pie chart for daily visibility.
+* Integrate into TimeSheet for our website.
+	- Auto post info into timesheet.
+	- Pull project info from timesheet for task titles or add a project|sku string to the record data.

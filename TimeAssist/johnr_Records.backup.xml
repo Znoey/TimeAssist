@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<Person name="johnr" password="johnr" filename="johnr_Records.xml">
+  <history>
+    <recordstack date="12/14/2012">
+      <record start="12/14/2012 1:24:17 PM" finish="12/14/2012 4:11:10 PM" duration="-02:46:53.2146555">
+        <task>Flash Cards</task>
+        <comment>Just exploring it again and refactoring code.  Possibly going to make a addition or subtraction version.</comment>
+      </record>
+      <record start="12/14/2012 1:18:26 PM" finish="12/14/2012 1:23:46 PM" duration="-00:05:20.1257708">
+        <task>OceanHouse Media</task>
+        <comment>Studying the ocean house media pictures that Sean sent us.</comment>
+      </record>
+      <record start="12/14/2012 12:33:32 PM" finish="12/14/2012 1:10:22 PM" duration="-00:36:50.4132506">
+        <task>Peter's Dream</task>
+        <comment>Finishing another bug that came up on the keyboards.</comment>
+      </record>
+      <record start="12/14/2012 11:51:29 AM" finish="12/14/2012 12:06:22 PM" duration="-00:14:53.2436428">
+        <task>rebuilding JFJ apk</task>
+        <comment>need to increment the bundle version code.</comment>
+      </record>
+      <record start="12/14/2012 10:59:23 AM" finish="12/14/2012 11:51:11 AM" duration="-00:51:48.3277339">
+        <task>Peter's Dream</task>
+        <comment>Looks like a bug got reopened for the music not saving the last music volume...</comment>
+      </record>
+      <record start="12/14/2012 10:51:11 AM" finish="12/14/2012 10:58:58 AM" duration="-00:07:47.6484694">
+        <task>Multiplication Flash Cards</task>
+        <comment>Stylizing my code based on my preferences and preparing to make the other FC projects.</comment>
+      </record>
+      <record start="12/14/2012 10:40:00 AM" finish="12/14/2012 10:50:45 AM" duration="-00:10:45.0118326">
+        <task>Determine my next task.</task>
+        <comment />
+      </record>
+      <record start="12/14/2012 9:42:49 AM" finish="12/14/2012 10:37:23 AM" duration="-00:54:34.3466035">
+        <task>Peter's Dream</task>
+        <comment>Some weird bugs are coming in.  Time to rapidly fix them.</comment>
+      </record>
+      <record start="12/14/2012 9:40:44 AM" finish="12/14/2012 9:42:32 AM" duration="-00:01:48.4881254">
+        <task>Fixing mail client.</task>
+        <comment>My email client marks everything from Toddh a red flag.  This has gotten on my nerves so its time to remove it.</comment>
+      </record>
+      <record start="12/14/2012 8:22:20 AM" finish="12/14/2012 9:39:39 AM" duration="-01:17:19.7934642">
+        <task>Peter's Dream</task>
+        <comment>Updating the scripts and perfecting anything i see wrong.  Then should be on a heavy push to QA for approval and submission.</comment>
+      </record>
+      <record start="12/14/2012 8:16:17 AM" finish="12/14/2012 8:21:50 AM" duration="-00:05:33.3558297">
+        <task>JFJ</task>
+        <comment>Exporting out the quick fixes last night for Peter's Dream.</comment>
+      </record>
+    </recordstack>
+  </history>
+</Person>

@@ -1,0 +1,244 @@
+<?xml version="1.0"?>
+<Person name="johnr" password="johnr" filename="johnr_Records.xml">
+  <history>
+    <recordstack date="12/14/2012">
+      <record start="12/14/2012 1:24:17 PM" finish="12/14/2012 4:11:10 PM" duration="-02:46:53">
+        <task>Flash Cards</task>
+        <comment>Just exploring it again and refactoring code.  Possibly going to make a addition or subtraction version.</comment>
+      </record>
+      <record start="12/14/2012 1:18:26 PM" finish="12/14/2012 1:23:46 PM" duration="-00:05:20">
+        <task>OceanHouse Media</task>
+        <comment>Studying the ocean house media pictures that Sean sent us.</comment>
+      </record>
+      <record start="12/14/2012 12:33:32 PM" finish="12/14/2012 1:10:22 PM" duration="-00:36:50">
+        <task>Peter's Dream</task>
+        <comment>Finishing another bug that came up on the keyboards.</comment>
+      </record>
+      <record start="12/14/2012 11:51:29 AM" finish="12/14/2012 12:06:22 PM" duration="-00:14:53">
+        <task>rebuilding JFJ apk</task>
+        <comment>need to increment the bundle version code.</comment>
+      </record>
+      <record start="12/14/2012 10:59:23 AM" finish="12/14/2012 11:51:11 AM" duration="-00:51:48">
+        <task>Peter's Dream</task>
+        <comment>Looks like a bug got reopened for the music not saving the last music volume...</comment>
+      </record>
+      <record start="12/14/2012 10:51:11 AM" finish="12/14/2012 10:58:58 AM" duration="-00:07:47">
+        <task>Multiplication Flash Cards</task>
+        <comment>Stylizing my code based on my preferences and preparing to make the other FC projects.</comment>
+      </record>
+      <record start="12/14/2012 10:40:00 AM" finish="12/14/2012 10:50:45 AM" duration="-00:10:45">
+        <task>Determine my next task.</task>
+        <comment />
+      </record>
+      <record start="12/14/2012 9:42:49 AM" finish="12/14/2012 10:37:23 AM" duration="-00:54:34">
+        <task>Peter's Dream</task>
+        <comment>Some weird bugs are coming in.  Time to rapidly fix them.</comment>
+      </record>
+      <record start="12/14/2012 9:40:44 AM" finish="12/14/2012 9:42:32 AM" duration="-00:01:48">
+        <task>Fixing mail client.</task>
+        <comment>My email client marks everything from Toddh a red flag.  This has gotten on my nerves so its time to remove it.</comment>
+      </record>
+      <record start="12/14/2012 8:22:20 AM" finish="12/14/2012 9:39:39 AM" duration="-01:17:19">
+        <task>Peter's Dream</task>
+        <comment>Updating the scripts and perfecting anything i see wrong.  Then should be on a heavy push to QA for approval and submission.</comment>
+      </record>
+      <record start="12/14/2012 8:16:17 AM" finish="12/14/2012 8:21:50 AM" duration="-00:05:33">
+        <task>JFJ</task>
+        <comment>Exporting out the quick fixes last night for Peter's Dream.</comment>
+      </record>
+    </recordstack>
+    <recordstack date="12/26/2012">
+      <record start="12/26/2012 3:17:14 PM" finish="12/26/2012 5:02:43 PM" duration="-01:45:29">
+        <task>Flash Cards</task>
+        <comment>Whatever bugs are left besides the iPad 531 crash i'm looking into.  Worked with sean on this too.  Still couldn't solve the crashes.</comment>
+      </record>
+      <record start="12/26/2012 12:58:47 PM" finish="12/26/2012 3:17:13 PM" duration="-02:18:26">
+        <task>Flash Cards</task>
+        <comment>Looking to improve its memory usage on the iOS devices. I'm stumped on this...  I'ma move onto something else</comment>
+      </record>
+      <record start="12/26/2012 12:31:45 PM" finish="12/26/2012 12:58:42 PM" duration="-00:26:57">
+        <task>Lunch</task>
+        <comment>looked up the holiday events from grand haven tribute website.</comment>
+      </record>
+      <record start="12/26/2012 11:33:45 AM" finish="12/26/2012 12:31:44 PM" duration="-00:57:59">
+        <task>Flash Cards</task>
+        <comment>Reducing memory usage for iOS Device.</comment>
+      </record>
+      <record start="12/26/2012 11:15:05 AM" finish="12/26/2012 11:33:33 AM" duration="-00:18:28">
+        <task>Flash Cards</task>
+        <comment>Going to test the new system and show it to McCoy to make sure it sounds OK to him.</comment>
+      </record>
+      <record start="12/26/2012 9:30:11 AM" finish="12/26/2012 11:15:04 AM" duration="-01:44:53">
+        <task>Flash Cards</task>
+        <comment>New audio system is in and working with individual spliced audio.</comment>
+      </record>
+      <record start="12/26/2012 9:29:05 AM" finish="12/26/2012 9:29:32 AM" duration="-00:00:27">
+        <task>Time Assist</task>
+        <comment>Updating to latest version, now with loading of records and updating the UI.</comment>
+      </record>
+    </recordstack>
+    <recordstack date="12/27/2012">
+      <record start="12/27/2012 8:04:00 AM" finish="12/27/2012 8:15:01 AM" duration="-00:11:01">
+        <task>Determine what to do.</task>
+        <comment>Days just starting, going to switch gears and jump into a different project like TLG for a bit instead of flash cards.</comment>
+      </record>
+      <record start="12/27/2012 8:15:02 AM" finish="12/27/2012 8:42:50 AM" duration="-00:27:48">
+        <task>The Last Game</task>
+        <comment>Look into this to help sean.  Just poked around and looked for memory consumers.</comment>
+      </record>
+      <record start="12/27/2012 8:42:52 AM" finish="12/27/2012 1:34:43 PM" duration="-04:51:51">
+        <task>Flash Cards</task>
+        <comment>More Memory improvements.</comment>
+      </record>
+      <record start="12/27/2012 1:34:44 PM" finish="12/27/2012 4:42:43 PM" duration="-03:07:59">
+        <task>Flash Cards</task>
+        <comment>Any other bugs left over before todd sends me an asset processor to test.
+Switched to Asset Processing stuff.</comment>
+      </record>
+      <record start="12/27/2012 4:42:44 PM" finish="12/27/2012 5:00:25 PM" duration="-00:17:41">
+        <task>Custom Packages</task>
+        <comment>Asset Processing updating and sprite inspector updating.</comment>
+      </record>
+    </recordstack>
+    <recordstack date="12/28/2012">
+      <record start="12/28/2012 4:19:15 PM" finish="12/28/2012 4:40:02 PM" duration="-00:20:47">
+        <task>Timesheet</task>
+        <comment>Doing timesheet for the week.</comment>
+      </record>
+      <record start="12/28/2012 1:52:15 PM" finish="12/28/2012 4:19:13 PM" duration="-02:26:58">
+        <task>Flash Cards</task>
+        <comment>Getting the stateless machine to work. Success!</comment>
+      </record>
+      <record start="12/28/2012 1:29:39 PM" finish="12/28/2012 1:52:14 PM" duration="-00:22:35">
+        <task>The Last Game</task>
+        <comment>Looking into memory issues with the book scene.  Working with sean on this.</comment>
+      </record>
+      <record start="12/28/2012 10:45:43 AM" finish="12/28/2012 1:29:38 PM" duration="-02:43:55">
+        <task>Flash Cards</task>
+        <comment>Merging the card scene into the title scene... or visa versa. Using the Stateless machine dll from Todd.</comment>
+      </record>
+      <record start="12/28/2012 9:29:03 AM" finish="12/28/2012 10:45:42 AM" duration="-01:16:39">
+        <task>Custom Packages</task>
+        <comment>Been hacking EZGui components to set up a system with one-button click to set the size of the component to the size of the sprite associated with its first frame of animation.</comment>
+      </record>
+      <record start="12/28/2012 8:34:25 AM" finish="12/28/2012 9:29:01 AM" duration="-00:54:36">
+        <task>Flash Cards</task>
+        <comment>wasn't working on this at all, was working on custom packages the whole time...</comment>
+      </record>
+    </recordstack>
+    <recordstack date="12/31/2012">
+      <record start="12/31/2012 8:13:40 AM" finish="12/31/2012 8:28:46 AM" duration="-00:15:06">
+        <task>TimeAssist</task>
+        <comment>Pie Chart drawing.  Well, Jessica kinda ruined this for me, lol.  ended up speaking about the bug(s) she found on Peter's Dream over the weekend.</comment>
+      </record>
+      <record start="12/31/2012 8:31:11 AM" finish="12/31/2012 8:51:44 AM" duration="-00:20:33">
+        <task>Peter's Dream</task>
+        <comment>the "Bugs for Monday" email.</comment>
+      </record>
+      <record start="12/31/2012 8:51:51 AM" finish="12/31/2012 9:28:02 AM" duration="-00:36:11">
+        <task>Flash Cards</task>
+        <comment>Fixing the loading scene's atlas issues with the slider.</comment>
+      </record>
+      <record start="12/31/2012 9:28:03 AM" finish="12/31/2012 9:40:37 AM" duration="-00:12:34">
+        <task>Make Me Giggle</task>
+        <comment>helping alex with some crash on the device?</comment>
+      </record>
+      <record start="12/31/2012 9:40:46 AM" finish="12/31/2012 9:56:25 AM" duration="-00:15:39">
+        <task>Custom Package</task>
+        <comment>Speak with sean about the button prior to building the atlas.</comment>
+      </record>
+      <record start="12/31/2012 9:56:26 AM" finish="12/31/2012 10:46:25 AM" duration="-00:49:59">
+        <task>Chat with programmers</task>
+        <comment>Going to change the custom packages to work in a cool, scaling method with built-in scale methods on sprites.</comment>
+      </record>
+      <record start="12/31/2012 10:46:27 AM" finish="12/31/2012 5:12:34 PM" duration="-06:26:07">
+        <task>Custom Packages</task>
+        <comment>EzGUI inspector and Sprite inspectors all updated and NOW ready to be updated.</comment>
+      </record>
+    </recordstack>
+    <recordstack date="1/3/2013">
+      <record start="1/3/2013 9:49:55 AM" finish="1/3/2013 3:16:41 PM" duration="-05:26:46">
+        <task>Flash Cards</task>
+        <comment>Fixing up some state management bugs.</comment>
+      </record>
+      <record start="1/3/2013 9:29:36 AM" finish="1/3/2013 9:49:54 AM" duration="-00:20:18">
+        <task>Custom Packages</task>
+        <comment>TIME IS WRONG.
+Been workign on custom packages + this durations time.</comment>
+      </record>
+      <record start="1/3/2013 8:33:45 AM" finish="1/3/2013 9:09:29 AM" duration="-00:35:44">
+        <task>Custom Package</task>
+        <comment>Updating ezgui and sm2 libraries and merging in our previous code into the new libraries.</comment>
+      </record>
+      <record start="1/3/2013 8:30:31 AM" finish="1/3/2013 8:33:12 AM" duration="-00:02:41">
+        <task>email &amp; calendar</task>
+        <comment>checking / writing emails, looking at events.</comment>
+      </record>
+      <record start="1/3/2013 8:16:19 AM" finish="1/3/2013 8:25:27 AM" duration="-00:09:08">
+        <task>Timesheet</task>
+        <comment>Filling out timesheet for this week because i got a notification for it.</comment>
+      </record>
+    </recordstack>
+    <recordstack date="1/4/2013">
+      <record start="1/4/2013 7:51:00 AM" finish="1/4/2013 8:13:20 AM" duration="-00:22:20">
+        <task>Flash Cards</task>
+        <comment>Building for QA.</comment>
+      </record>
+      <record start="1/4/2013 8:13:28 AM" finish="1/4/2013 9:11:32 AM" duration="-00:58:04">
+        <task>Flash Cards</task>
+        <comment>Working on the transitions between the loading scene and the other scenes. NOT FINISHED</comment>
+      </record>
+      <record start="1/4/2013 9:11:32 AM" finish="1/4/2013 9:42:14 AM" duration="-00:30:42">
+        <task>State of Confusion</task>
+        <comment>Working with dan to do iOS Profiling on his computer.</comment>
+      </record>
+      <record start="1/4/2013 9:42:15 AM" finish="1/4/2013 4:12:08 PM" duration="-06:29:53">
+        <task>Flash Cards</task>
+        <comment>Transition Object for doing awesome transitions.  Gave the ability to provide any angle for the Snappy Swipe transition.</comment>
+      </record>
+      <record start="1/4/2013 4:12:22 PM" finish="1/4/2013 4:53:17 PM" duration="-00:40:55">
+        <task>Time Sheet</task>
+        <comment>Filling out timesheet and sending the weekend update.</comment>
+      </record>
+    </recordstack>
+    <recordstack date="1/7/2013">
+      <record start="1/7/2013 10:50:58 AM" finish="1/7/2013 1:21:22 PM" duration="-02:30:24">
+        <task>The Last Game</task>
+        <comment>LUNCH INCLUDED. Making some changes to the application based on the notes from the meeting.</comment>
+      </record>
+      <record start="1/7/2013 9:51:33 AM" finish="1/7/2013 10:50:57 AM" duration="-00:59:24">
+        <task>The Last Game</task>
+        <comment>Looking into fixing whatever is assigned to me in bugzilla on tlg.  Had a meeting with Sean, Barb, and Todd on some changes to the application.</comment>
+      </record>
+      <record start="1/7/2013 9:46:06 AM" finish="1/7/2013 9:51:32 AM" duration="-00:05:26">
+        <task>Determine next task...</task>
+        <comment>I've just pushed out a good build to QA for FC.  Need something else to do now...</comment>
+      </record>
+      <record start="1/7/2013 8:59:57 AM" finish="1/7/2013 9:45:50 AM" duration="-00:45:53">
+        <task>Flash Cards</task>
+        <comment>Filling out any bug reports that are open and resolved before sending another build to QA.</comment>
+      </record>
+      <record start="1/7/2013 8:37:53 AM" finish="1/7/2013 8:59:56 AM" duration="-00:22:03">
+        <task>Custom Packages</task>
+        <comment>Going to update the loading utiilities since i've changed them for the flash card app.</comment>
+      </record>
+      <record start="1/7/2013 8:13:29 AM" finish="1/7/2013 8:37:52 AM" duration="-00:24:23">
+        <task>Flash Cards</task>
+        <comment>The list gets skewed when entering / leaving the flash card scene.  That is my priority today.
+Fixed! It looks like the issues has been solved so far.</comment>
+      </record>
+      <record start="1/7/2013 8:02:41 AM" finish="1/7/2013 8:13:28 AM" duration="-00:10:47">
+        <task>Determine Weekly Task</task>
+        <comment>Spending the morning writing down what i want to accomplish this week and when.</comment>
+      </record>
+      <record start="1/7/2013 1:21:52 PM" finish="1/7/2013 4:57:29 PM" duration="-03:35:37">
+        <task>The Last Game</task>
+        <comment>Going to fix bugs on the title now.  Fixed almost all the bugs assigned to me on the title and built for android on the Nook to test its stuff and show to sean.  Showed the yellowing to jessica for her thoughts.</comment>
+      </record>
+      <record start="1/7/2013 4:58:50 PM" finish="1/7/2013 5:04:54 PM" duration="-00:06:04">
+        <task>TimeSheet</task>
+        <comment>Filling out TimeSheet for the day.</comment>
+      </record>
+    </recordstack>
+  </history>
+</Person>

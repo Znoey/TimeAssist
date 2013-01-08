@@ -1,0 +1,13 @@
+c:\users\johnr\documents\visual studio 2010\Projects\TimeAssist\TimeAssist\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\johnr\documents\visual studio 2010\Projects\TimeAssist\TimeAssist\obj\x86\Debug\TimeAssist.Properties.Resources.resources
+c:\users\johnr\documents\visual studio 2010\Projects\TimeAssist\TimeAssist\obj\x86\Debug\GenerateResource.read.1.tlog
+c:\users\johnr\documents\visual studio 2010\Projects\TimeAssist\TimeAssist\obj\x86\Debug\GenerateResource.write.1.tlog
+c:\users\johnr\documents\visual studio 2010\Projects\TimeAssist\TimeAssist\bin\Debug\TimeAssist.exe
+c:\users\johnr\documents\visual studio 2010\Projects\TimeAssist\TimeAssist\bin\Debug\TimeAssist.pdb
+c:\users\johnr\documents\visual studio 2010\Projects\TimeAssist\TimeAssist\obj\x86\Debug\TimeAssist.exe
+c:\users\johnr\documents\visual studio 2010\Projects\TimeAssist\TimeAssist\obj\x86\Debug\TimeAssist.pdb
+c:\users\johnr\documents\visual studio 2010\Projects\TimeAssist\TimeAssist\obj\x86\Debug\TimeAssist.AddTask.resources
+C:\Users\johnr\documents\visual studio 2010\Projects\TimeAssist\TimeAssist\obj\x86\Debug\TimeAssist.Main.resources
+C:\Users\johnr\documents\visual studio 2010\Projects\TimeAssist\TimeAssist\obj\x86\Debug\TimeAssist.LoginForm.resources
+C:\Users\johnr\documents\visual studio 2010\Projects\TimeAssist\TimeAssist\bin\Debug\WindowsFormsControlLibrary1.dll
+C:\Users\johnr\documents\visual studio 2010\Projects\TimeAssist\TimeAssist\bin\Debug\WindowsFormsControlLibrary1.pdb
