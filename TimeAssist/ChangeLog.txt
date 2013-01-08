@@ -21,6 +21,7 @@ TOC
 * Displaying pie chart with data.
 * Adding and commenting on tasks more fluid.
 * Sorted the display on the main form and in the pie chart form.
+* Added project to GitHub.
 
 ** 1.0 **
 * Saving and Loading xml data.
