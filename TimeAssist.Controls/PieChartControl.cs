@@ -36,7 +36,6 @@ namespace TimeAssist.Controls
             pieChartBrushes.Enqueue(Brushes.Pink);
             pieChartBrushes.Enqueue(Brushes.Cyan);
             pieChartBrushes.Enqueue(Brushes.Gray);
-            pieChartBrushes.Enqueue(Brushes.Black);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -48,17 +47,20 @@ namespace TimeAssist.Controls
 
             if (angles != null && angles.Length > 0)
             {
-                float nextAngle = 0;
-                float sweepAngle = 0;
+                float startAngle = (30 * 8) - (30 * 3);
+                float nextAngle = startAngle;
+                float sweepAngle =  0;
+                float totalAngle = (360) - (30 * 4);
                 Brush brush;
                 for (int i = 0; i < angles.Length; ++i)
                 {
-                    sweepAngle = angles[i] * 360.0f;
+                    sweepAngle = angles[i] * 360f;
                     brush = GetPieChartBrush();
                     e.Graphics.FillPie(brush, pieRect, nextAngle, sweepAngle);
                     e.Graphics.DrawPie(Pens.Black, pieRect, nextAngle, sweepAngle);
-                    nextAngle += angles[i] * 360.0f;
+                    nextAngle += angles[i] * totalAngle;
                 }
+                e.Graphics.FillPie(Brushes.Black, pieRect, nextAngle, sweepAngle);
             }
             if (legendWords != null && legendWords.Length > 0)
             {

@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.IO;
-using System.Xml.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization.Formatters.Soap;
 
 namespace TimeAssist
 {
@@ -277,13 +267,7 @@ namespace TimeAssist
 
                 List<float> data = new List<float>();
                 List<string> tasks = new List<string>();
-
-                List<Record> sorted = new List<Record>(person.Records[date.ToString("d")].ToArray());
-                sorted.Sort((Record a, Record b) =>
-                {
-                    return a.Start.CompareTo(b.Start);
-                });
-                foreach (var item in sorted)
+                foreach (var item in person.Records[date.ToString("d")])
                 {
                     data.Add((float)(Math.Abs(item.Duration.TotalHours) / totalHours));
                     tasks.Add(item.Task);

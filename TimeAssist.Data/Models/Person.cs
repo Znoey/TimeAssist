@@ -16,8 +16,8 @@ namespace TimeAssist
         public string Name { get { return name; } }
         public string Password { get { return password; } }
         public string FileName { get { return recordFileName; } }
-        public Dictionary<string, Stack<Record>> Records { get { return records; } }
-        public Stack<Record> TodaysRecords 
+        public Dictionary<string, List<Record>> Records { get { return records; } }
+        public List<Record> TodaysRecords 
         { 
             get 
             {
@@ -34,7 +34,7 @@ namespace TimeAssist
             name = null;
             password = null;
             recordFileName = null;
-            records = new Dictionary<string, Stack<Record>>();
+            records = new Dictionary<string, List<Record>>();
         }
 
         public Person(string _name, string _password)
@@ -42,7 +42,7 @@ namespace TimeAssist
             name = _name;
             password = _password;
             recordFileName = name + "_Records.xml";
-            records = new Dictionary<string, Stack<Record>>();
+            records = new Dictionary<string, List<Record>>();
         }
 
         #region Save / Load file
@@ -99,10 +99,14 @@ namespace TimeAssist
             string key = DateTime.Today.ToString("d");
             if (!records.ContainsKey(key))
             {
-                records.Add(key, new Stack<Record>());
+                records.Add(key, new List<Record>());
             }
 
-            records[key].Push(recordToAdd);
+            records[key].Add(recordToAdd);
+            records[key].Sort((Record a, Record b) =>
+            {
+                return a.Start.CompareTo(b.Start);
+            });
         }
 
         #region IXmlSerializable interface
@@ -117,7 +121,7 @@ namespace TimeAssist
             name = reader.GetAttribute("name");
             password = reader.GetAttribute("password");
             recordFileName = reader.GetAttribute("filename");
-            records = new Dictionary<string, Stack<Record>>();
+            records = new Dictionary<string, List<Record>>();
             reader.ReadStartElement(); // "history" node
             DateTime stackTime = DateTime.Today;
             while (!reader.EOF)
@@ -131,17 +135,17 @@ namespace TimeAssist
                 {
                     reader.ReadStartElement();
                 }
-                else if (reader.Name == "recordstack")
+                else if (reader.Name == "recordstack" || reader.Name == "recordlist")
                 {
                     stackTime = DateTime.Parse(reader.GetAttribute("date"));
-                    records.Add(stackTime.ToString("d"), new Stack<Record>());
+                    records.Add(stackTime.ToString("d"), new List<Record>());
                     reader.ReadStartElement();
                 }
                 else if (reader.Name == "record")
                 {
                     Record r = new Record();
                     r.ReadXml(reader);
-                    records[stackTime.ToString("d")].Push(r);
+                    records[stackTime.ToString("d")].Add(r);
                     //reader.ReadEndElement();
                 }
             }
@@ -158,7 +162,7 @@ namespace TimeAssist
             writer.WriteStartElement("history");
             foreach (var date in records.Keys)
             {
-                writer.WriteStartElement("recordstack");
+                writer.WriteStartElement("recordlist");
                 writer.WriteAttributeString("date", date);
                 foreach(var record in records[date])
                 {
@@ -174,7 +178,7 @@ namespace TimeAssist
         private string name;
         private string password;
         private string recordFileName;
-        private Dictionary<string, Stack<Record>> records;
+        private Dictionary<string, List<Record>> records;
 
         #region ISerializabel Interface
 
@@ -184,7 +188,7 @@ namespace TimeAssist
             password = info.GetString("Password");
             recordFileName = info.GetString("RecordFileName");
 
-            records = new Dictionary<string, Stack<Record>>();
+            records = new Dictionary<string, List<Record>>();
         }
         
 
@@ -194,7 +198,7 @@ namespace TimeAssist
             password = info.GetString("Password");
             recordFileName = info.GetString("RecordFileName");
 
-            records = new Dictionary<string, Stack<Record>>();
+            records = new Dictionary<string, List<Record>>();
         }
 
         #endregion
