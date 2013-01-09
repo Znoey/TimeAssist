@@ -172,10 +172,8 @@
             this.Controls.Add(this.pieChartControl1);
             this.Controls.Add(this.groupBoxRecords);
             this.Controls.Add(this.groupBoxCurrentTask);
-            this.MaximizeBox = false;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
-            this.ShowInTaskbar = false;
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Time Assist";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
