@@ -43,6 +43,7 @@
             this.treeViewRecords = new System.Windows.Forms.TreeView();
             this.userControl11 = new TimeAssist.Controls.PieChartControl();
             this.pieChartControl1 = new TimeAssist.Controls.PieChartControl();
+            this.timerSecondUpdate = new System.Windows.Forms.Timer(this.components);
             this.notifyContextMenu.SuspendLayout();
             this.groupBoxCurrentTask.SuspendLayout();
             this.groupBoxRecords.SuspendLayout();
@@ -164,6 +165,12 @@
             this.pieChartControl1.Size = new System.Drawing.Size(240, 249);
             this.pieChartControl1.TabIndex = 6;
             // 
+            // timerSecondUpdate
+            // 
+            this.timerSecondUpdate.Enabled = true;
+            this.timerSecondUpdate.Interval = 1000;
+            this.timerSecondUpdate.Tick += new System.EventHandler(this.timerSecondUpdate_Tick);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -200,6 +207,7 @@
         private System.Windows.Forms.TreeView treeViewRecords;
         private TimeAssist.Controls.PieChartControl userControl11;
         private TimeAssist.Controls.PieChartControl pieChartControl1;
+        private System.Windows.Forms.Timer timerSecondUpdate;
     }
 }
 

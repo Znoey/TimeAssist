@@ -299,5 +299,13 @@ namespace TimeAssist
                 Clipboard.SetText(comment);
             }
         }
+
+        private void timerSecondUpdate_Tick(object sender, EventArgs e)
+        {
+            if (currentTask != null)
+            {
+                textBox1.Text = currentTask.Task + " : " + Math.Abs((DateTime.Now - currentTask.Start).TotalHours).ToString("F2");
+            }
+        }
     }
 }
