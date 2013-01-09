@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsControlLibrary1
+﻿namespace TimeAssist.Controls
 {
     partial class PieChartControl
     {

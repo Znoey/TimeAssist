@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace WindowsFormsControlLibrary1
+namespace TimeAssist.Controls
 {
     public partial class PieChartControl : UserControl
     {

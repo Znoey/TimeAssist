@@ -2,10 +2,18 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeAssist", "TimeAssist\TimeAssist.csproj", "{93B8EFDD-5F68-46E0-BE87-34ADE2BFFD1D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7753A384-DD47-4085-BFB5-53E2015F02FE} = {7753A384-DD47-4085-BFB5-53E2015F02FE}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebRequestGetExample", "WebRequestGetExample\WebRequestGetExample.csproj", "{9D0C734D-FA76-4C08-8C14-AADDBDE1C658}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib", "WindowsFormsControlLibrary1\Lib.csproj", "{023CBD0F-9FE1-4AC0-8475-F45F79A6E152}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeAssist.Controls", "WindowsFormsControlLibrary1\TimeAssist.Controls.csproj", "{023CBD0F-9FE1-4AC0-8475-F45F79A6E152}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7753A384-DD47-4085-BFB5-53E2015F02FE} = {7753A384-DD47-4085-BFB5-53E2015F02FE}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeAssist.Data", "TimeAssist.Data\TimeAssist.Data.csproj", "{7753A384-DD47-4085-BFB5-53E2015F02FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +55,16 @@ Global
 		{023CBD0F-9FE1-4AC0-8475-F45F79A6E152}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{023CBD0F-9FE1-4AC0-8475-F45F79A6E152}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{023CBD0F-9FE1-4AC0-8475-F45F79A6E152}.Release|x86.ActiveCfg = Release|Any CPU
+		{7753A384-DD47-4085-BFB5-53E2015F02FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7753A384-DD47-4085-BFB5-53E2015F02FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7753A384-DD47-4085-BFB5-53E2015F02FE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7753A384-DD47-4085-BFB5-53E2015F02FE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7753A384-DD47-4085-BFB5-53E2015F02FE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7753A384-DD47-4085-BFB5-53E2015F02FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7753A384-DD47-4085-BFB5-53E2015F02FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7753A384-DD47-4085-BFB5-53E2015F02FE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7753A384-DD47-4085-BFB5-53E2015F02FE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7753A384-DD47-4085-BFB5-53E2015F02FE}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

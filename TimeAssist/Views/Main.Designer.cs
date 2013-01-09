@@ -41,8 +41,8 @@
             this.buttonFinishTask = new System.Windows.Forms.Button();
             this.groupBoxRecords = new System.Windows.Forms.GroupBox();
             this.treeViewRecords = new System.Windows.Forms.TreeView();
-            this.userControl11 = new WindowsFormsControlLibrary1.PieChartControl();
-            this.pieChartControl1 = new WindowsFormsControlLibrary1.PieChartControl();
+            this.userControl11 = new TimeAssist.Controls.PieChartControl();
+            this.pieChartControl1 = new TimeAssist.Controls.PieChartControl();
             this.notifyContextMenu.SuspendLayout();
             this.groupBoxCurrentTask.SuspendLayout();
             this.groupBoxRecords.SuspendLayout();
@@ -200,8 +200,8 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBoxRecords;
         private System.Windows.Forms.TreeView treeViewRecords;
-        private WindowsFormsControlLibrary1.PieChartControl userControl11;
-        private WindowsFormsControlLibrary1.PieChartControl pieChartControl1;
+        private TimeAssist.Controls.PieChartControl userControl11;
+        private TimeAssist.Controls.PieChartControl pieChartControl1;
     }
 }
 

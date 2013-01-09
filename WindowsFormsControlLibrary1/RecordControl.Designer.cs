@@ -1,4 +1,4 @@
-﻿namespace TimeAssist.Views
+﻿namespace TimeAssist.Controls
 {
     partial class RecordControl
     {

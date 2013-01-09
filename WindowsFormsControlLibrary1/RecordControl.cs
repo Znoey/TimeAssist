@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace TimeAssist.Views
+namespace TimeAssist.Controls
 {
     public partial class RecordControl : UserControl
     {
