@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\Record.cs" />
     <Compile Include="PieChartControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

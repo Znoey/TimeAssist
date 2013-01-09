@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeAssist", "TimeAssist\TimeAssist.csproj", "{93B8EFDD-5F68-46E0-BE87-34ADE2BFFD1D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebRequestGetExample", "WebRequestGetExample\WebRequestGetExample.csproj", "{9D0C734D-FA76-4C08-8C14-AADDBDE1C658}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomControlLibrary", "WindowsFormsControlLibrary1\CustomControlLibrary.csproj", "{023CBD0F-9FE1-4AC0-8475-F45F79A6E152}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib", "WindowsFormsControlLibrary1\Lib.csproj", "{023CBD0F-9FE1-4AC0-8475-F45F79A6E152}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
