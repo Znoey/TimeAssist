@@ -121,7 +121,7 @@
       <Project>{7753A384-DD47-4085-BFB5-53E2015F02FE}</Project>
       <Name>TimeAssist.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WindowsFormsControlLibrary1\TimeAssist.Controls.csproj">
+    <ProjectReference Include="..\TimeAssist.Controls\TimeAssist.Controls.csproj">
       <Project>{023CBD0F-9FE1-4AC0-8475-F45F79A6E152}</Project>
       <Name>TimeAssist.Controls</Name>
     </ProjectReference>

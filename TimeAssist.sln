@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeAssist", "TimeAssist\Ti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebRequestGetExample", "WebRequestGetExample\WebRequestGetExample.csproj", "{9D0C734D-FA76-4C08-8C14-AADDBDE1C658}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeAssist.Controls", "WindowsFormsControlLibrary1\TimeAssist.Controls.csproj", "{023CBD0F-9FE1-4AC0-8475-F45F79A6E152}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeAssist.Controls", "TimeAssist.Controls\TimeAssist.Controls.csproj", "{023CBD0F-9FE1-4AC0-8475-F45F79A6E152}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7753A384-DD47-4085-BFB5-53E2015F02FE} = {7753A384-DD47-4085-BFB5-53E2015F02FE}
 	EndProjectSection
