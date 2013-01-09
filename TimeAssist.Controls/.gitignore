@@ -40,9 +40,10 @@ Thumbs.db
 # Visual Studio auto-generated #
 ################################
 # Files generated when either compiling or using visual studio.
-obj
+*/obj/
+*/bin/
+*.pdb
 *.tlog
 *.cache
 *.resources
-*.pdb
-*.resources
+
