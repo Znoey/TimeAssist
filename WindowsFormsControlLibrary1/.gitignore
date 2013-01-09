@@ -45,5 +45,4 @@ obj
 *.cache
 *.resources
 *.pdb
-/bin
-/obj
+*.resources

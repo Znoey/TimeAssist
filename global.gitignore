@@ -37,13 +37,8 @@ Icon?
 ehthumbs.db
 Thumbs.db
 
-# Visual Studio auto-generated #
-################################
-# Files generated when either compiling or using visual studio.
-obj
-*.tlog
-*.cache
-*.resources
+# Visual Studio files #
+#######################
+*/bin
+*/obj
 *.pdb
-/bin
-/obj
