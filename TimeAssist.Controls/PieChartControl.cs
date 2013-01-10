@@ -14,8 +14,7 @@ namespace TimeAssist.Controls
     {
         float[] angles;
         string[] legendWords;
-        Queue<Brush> pieChartBrushes = new Queue<Brush>();
-        Queue<Brush> legendBrushes = new Queue<Brush>();
+        List<Brush> pieChartBrushes = new List<Brush>();
 
         Rectangle pieRect;
         Rectangle legendRect;
@@ -23,78 +22,90 @@ namespace TimeAssist.Controls
         public PieChartControl()
         {
             InitializeComponent();
-            AddPensToList();
+            ResetPens();
         }
 
-        private void AddPensToList()
+        private void ResetPens()
         {
-            pieChartBrushes.Enqueue(Brushes.Red);
-            pieChartBrushes.Enqueue(Brushes.Green);
-            pieChartBrushes.Enqueue(Brushes.Blue);
-            pieChartBrushes.Enqueue(Brushes.Yellow);
-            pieChartBrushes.Enqueue(Brushes.Purple);
-            pieChartBrushes.Enqueue(Brushes.Pink);
-            pieChartBrushes.Enqueue(Brushes.Cyan);
-            pieChartBrushes.Enqueue(Brushes.Gray);
+            pieChartBrushes.Add(Brushes.Red);
+            pieChartBrushes.Add(Brushes.Green);
+            pieChartBrushes.Add(Brushes.Blue);
+            pieChartBrushes.Add(Brushes.Yellow);
+            pieChartBrushes.Add(Brushes.Purple);
+            pieChartBrushes.Add(Brushes.Pink);
+            pieChartBrushes.Add(Brushes.Cyan);
+            pieChartBrushes.Add(Brushes.Gray);
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            pieRect = new Rectangle(0, 0, Width / 2, Height / 2);
-            legendRect = new Rectangle(pieRect.Width, 0, Width / 2, Height / 2);
-            e.Graphics.FillRectangle(Brushes.White, new Rectangle(0, 0, Size.Width, Size.Height));
+            try
+            {
 
-            if (angles != null && angles.Length > 0)
-            {
-                float startAngle = (30 * 8) - (30 * 3);
-                float nextAngle = startAngle;
-                float sweepAngle =  0;
-                float totalAngle = (360) - (30 * 4);
-                Brush brush;
-                for (int i = 0; i < angles.Length; ++i)
+                pieRect = new Rectangle(0, 0, Width / 2, Height / 2);
+                legendRect = new Rectangle(pieRect.Width, 0, Width / 2, Height / 2);
+                e.Graphics.FillRectangle(Brushes.White, new Rectangle(0, 0, Size.Width, Size.Height));
+
+                if (angles != null && angles.Length > 0)
                 {
-                    sweepAngle = angles[i] * 360f;
-                    brush = GetPieChartBrush();
-                    e.Graphics.FillPie(brush, pieRect, nextAngle, sweepAngle);
-                    e.Graphics.DrawPie(Pens.Black, pieRect, nextAngle, sweepAngle);
-                    nextAngle += angles[i] * totalAngle;
+                    float startAngle = (30 * 8) - (30 * 3);
+                    float nextAngle = startAngle;
+                    float sweepAngle = 0;
+                    float totalAngle = (360) - (30 * 4);
+                    Brush brush;
+                    for (int i = 0; i < angles.Length; ++i)
+                    {
+                        sweepAngle = angles[i] * 360f;
+                        brush = GetPieChartBrush(i);
+                        e.Graphics.FillPie(brush, pieRect, nextAngle, sweepAngle);
+                        e.Graphics.DrawPie(Pens.Black, pieRect, nextAngle, sweepAngle);
+                        nextAngle += angles[i] * totalAngle;
+                    }
+                    e.Graphics.FillPie(Brushes.Black, pieRect, nextAngle, sweepAngle);
                 }
-                e.Graphics.FillPie(Brushes.Black, pieRect, nextAngle, sweepAngle);
-            }
-            if (legendWords != null && legendWords.Length > 0)
-            {
-                int startX = legendRect.X;
-                PointF pt = new PointF(legendRect.X, legendRect.Y);
-                //e.Graphics.DrawRectangle(Pens.Black, legendRect);
-                for (int i = 0; i < legendWords.Length; ++i)
+
+                DrawClock(e);
+
+                if (legendWords != null && legendWords.Length > 0)
                 {
-                    e.Graphics.DrawString(legendWords[i], Font, Brushes.Black, new PointF(pt.X + 1, pt.Y + 1));
-                    e.Graphics.DrawString(legendWords[i], Font, GetLegendBrush(), pt);
-                    pt.Y += Font.SizeInPoints + 2;
+                    int startX = legendRect.X;
+                    PointF pt = new PointF(legendRect.X, legendRect.Y);
+                    //e.Graphics.DrawRectangle(Pens.Black, legendRect);
+                    for (int i = 0; i < legendWords.Length; ++i)
+                    {
+                        e.Graphics.DrawString(legendWords[i], Font, Brushes.Black, new PointF(pt.X + 1, pt.Y + 1));
+                        e.Graphics.DrawString(legendWords[i], Font, GetPieChartBrush(i), pt);
+                        pt.Y += Font.SizeInPoints + 2;
+                    }
                 }
             }
+            catch (Exception exc)
+            {
+                e.Graphics.DrawString(exc.Message, Font, Brushes.Black, PointF.Empty);
+                ResetPens();
+            }
+        }
+
+        private void DrawClock(PaintEventArgs e)
+        {
+            // TODO: Draw the clock around the pie chart.
         }
 
         public void SetData(float[] angles, string[] tasks)
         {
+            if (angles.Count() != tasks.Count())
+            {
+                throw new Exception("Cannot set angles without matching tasks");
+            }
             this.angles = angles;
             this.legendWords = tasks;
             Invalidate();
         }
 
-        private Brush GetPieChartBrush()
+        private Brush GetPieChartBrush(int i)
         {
-            Brush pen = pieChartBrushes.Dequeue();
-            legendBrushes.Enqueue(pen);
-            return pen;
-        }
-
-        private Brush GetLegendBrush()
-        {
-            Brush pen = legendBrushes.Dequeue();
-            pieChartBrushes.Enqueue(pen);
-            return pen;
+            return pieChartBrushes[i % pieChartBrushes.Count];
         }
     }
 }
