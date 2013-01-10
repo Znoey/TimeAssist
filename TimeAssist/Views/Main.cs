@@ -274,6 +274,8 @@ namespace TimeAssist
                 }
 
                 pieChartControl1.SetData(data.ToArray(), tasks.ToArray());
+
+                pieChartControl1.SetData(person.Records[date.ToString("d")]);
             }
             else
             {
