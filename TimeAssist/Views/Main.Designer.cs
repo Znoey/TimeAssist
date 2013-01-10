@@ -44,6 +44,7 @@
             this.userControl11 = new TimeAssist.Controls.PieChartControl();
             this.pieChartControl1 = new TimeAssist.Controls.PieChartControl();
             this.timerSecondUpdate = new System.Windows.Forms.Timer(this.components);
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.notifyContextMenu.SuspendLayout();
             this.groupBoxCurrentTask.SuspendLayout();
             this.groupBoxRecords.SuspendLayout();
@@ -88,6 +89,7 @@
             // 
             // buttonStartTask
             // 
+            this.buttonStartTask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonStartTask.Location = new System.Drawing.Point(7, 50);
             this.buttonStartTask.Name = "buttonStartTask";
             this.buttonStartTask.Size = new System.Drawing.Size(121, 23);
@@ -98,20 +100,22 @@
             // 
             // groupBoxCurrentTask
             // 
-            this.groupBoxCurrentTask.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBoxCurrentTask.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxCurrentTask.Controls.Add(this.textBox1);
             this.groupBoxCurrentTask.Controls.Add(this.buttonFinishTask);
             this.groupBoxCurrentTask.Controls.Add(this.buttonStartTask);
             this.groupBoxCurrentTask.Location = new System.Drawing.Point(12, 12);
             this.groupBoxCurrentTask.Name = "groupBoxCurrentTask";
-            this.groupBoxCurrentTask.Size = new System.Drawing.Size(268, 80);
+            this.groupBoxCurrentTask.Size = new System.Drawing.Size(268, 81);
             this.groupBoxCurrentTask.TabIndex = 3;
             this.groupBoxCurrentTask.TabStop = false;
             this.groupBoxCurrentTask.Text = "Current Task";
             // 
             // textBox1
             // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Location = new System.Drawing.Point(6, 19);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
@@ -122,6 +126,7 @@
             // 
             // buttonFinishTask
             // 
+            this.buttonFinishTask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonFinishTask.Location = new System.Drawing.Point(134, 50);
             this.buttonFinishTask.Name = "buttonFinishTask";
             this.buttonFinishTask.Size = new System.Drawing.Size(126, 23);
@@ -135,9 +140,9 @@
             this.groupBoxRecords.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxRecords.Controls.Add(this.treeViewRecords);
-            this.groupBoxRecords.Location = new System.Drawing.Point(286, 12);
+            this.groupBoxRecords.Location = new System.Drawing.Point(283, 12);
             this.groupBoxRecords.Name = "groupBoxRecords";
-            this.groupBoxRecords.Size = new System.Drawing.Size(293, 328);
+            this.groupBoxRecords.Size = new System.Drawing.Size(293, 271);
             this.groupBoxRecords.TabIndex = 5;
             this.groupBoxRecords.TabStop = false;
             this.groupBoxRecords.Text = "All Records";
@@ -147,7 +152,7 @@
             this.treeViewRecords.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewRecords.Location = new System.Drawing.Point(3, 16);
             this.treeViewRecords.Name = "treeViewRecords";
-            this.treeViewRecords.Size = new System.Drawing.Size(287, 309);
+            this.treeViewRecords.Size = new System.Drawing.Size(287, 252);
             this.treeViewRecords.TabIndex = 4;
             this.treeViewRecords.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewRecords_AfterSelect);
             // 
@@ -160,9 +165,12 @@
             // 
             // pieChartControl1
             // 
+            this.pieChartControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pieChartControl1.Location = new System.Drawing.Point(12, 99);
             this.pieChartControl1.Name = "pieChartControl1";
-            this.pieChartControl1.Size = new System.Drawing.Size(240, 249);
+            this.pieChartControl1.Size = new System.Drawing.Size(265, 181);
             this.pieChartControl1.TabIndex = 6;
             // 
             // timerSecondUpdate
@@ -171,15 +179,25 @@
             this.timerSecondUpdate.Interval = 1000;
             this.timerSecondUpdate.Tick += new System.EventHandler(this.timerSecondUpdate_Tick);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Location = new System.Drawing.Point(0, 286);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(588, 22);
+            this.statusStrip1.TabIndex = 7;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(591, 352);
+            this.ClientSize = new System.Drawing.Size(588, 308);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.pieChartControl1);
             this.Controls.Add(this.groupBoxRecords);
             this.Controls.Add(this.groupBoxCurrentTask);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(604, 346);
             this.Name = "Main";
             this.Text = "Time Assist";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -189,6 +207,7 @@
             this.groupBoxCurrentTask.PerformLayout();
             this.groupBoxRecords.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -208,6 +227,7 @@
         private TimeAssist.Controls.PieChartControl userControl11;
         private TimeAssist.Controls.PieChartControl pieChartControl1;
         private System.Windows.Forms.Timer timerSecondUpdate;
+        private System.Windows.Forms.StatusStrip statusStrip1;
     }
 }
 

@@ -136,5 +136,10 @@ namespace TimeAssist.Controls
         {
             return pieChartBrushes[i % pieChartBrushes.Count];
         }
+
+        private float GetRecordPercentageAngle(Record r)
+        {
+            return (float)(Math.Abs(r.Duration.TotalHours) / totalHours);
+        }
     }
 }
