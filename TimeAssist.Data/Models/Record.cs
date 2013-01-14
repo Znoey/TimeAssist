@@ -13,7 +13,7 @@ namespace TimeAssist
         /// <summary>
         /// Returns the duration of time this task was worked on.
         /// </summary>
-        public TimeSpan Duration { get { return start - finish; } }
+        public float Duration { get { return Math.Abs((float)(start - finish).TotalHours); } }
 
         /// <summary>
         /// get or set the value for when this task was started.

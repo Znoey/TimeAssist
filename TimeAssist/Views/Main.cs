@@ -221,9 +221,7 @@ namespace TimeAssist
         /// <param name="task"></param>
         private string FormatTreeViewString(Record task)
         {
-            float duration = task.Duration.Hours;
-            duration += (task.Duration.Minutes / 60f);
-            return duration.ToString("F2")
+            return task.Duration.ToString("F2")
                 + " @"
                 + task.Task 
                 + " #" 
@@ -258,23 +256,7 @@ namespace TimeAssist
         {
             if (e.Node.Parent == null)
             {
-                DateTime date = DateTime.Parse(e.Node.Text);
-                double totalHours = 0;
-                foreach (var item in person.Records[date.ToString("d")])
-                {
-                    totalHours += Math.Abs(item.Duration.TotalHours);
-                }
-
-                List<float> data = new List<float>();
-                List<string> tasks = new List<string>();
-                foreach (var item in person.Records[date.ToString("d")])
-                {
-                    data.Add((float)(Math.Abs(item.Duration.TotalHours) / totalHours));
-                    tasks.Add(item.Task);
-                }
-
-                pieChartControl1.SetData(data.ToArray(), tasks.ToArray());
-
+                DateTime date = DateTime.Parse(e.Node.Text);                
                 pieChartControl1.SetData(person.Records[date.ToString("d")]);
             }
             else
