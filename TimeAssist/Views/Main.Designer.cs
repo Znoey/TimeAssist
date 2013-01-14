@@ -142,7 +142,7 @@
             this.groupBoxRecords.Controls.Add(this.treeViewRecords);
             this.groupBoxRecords.Location = new System.Drawing.Point(283, 12);
             this.groupBoxRecords.Name = "groupBoxRecords";
-            this.groupBoxRecords.Size = new System.Drawing.Size(293, 271);
+            this.groupBoxRecords.Size = new System.Drawing.Size(293, 347);
             this.groupBoxRecords.TabIndex = 5;
             this.groupBoxRecords.TabStop = false;
             this.groupBoxRecords.Text = "All Records";
@@ -152,7 +152,7 @@
             this.treeViewRecords.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewRecords.Location = new System.Drawing.Point(3, 16);
             this.treeViewRecords.Name = "treeViewRecords";
-            this.treeViewRecords.Size = new System.Drawing.Size(287, 252);
+            this.treeViewRecords.Size = new System.Drawing.Size(287, 328);
             this.treeViewRecords.TabIndex = 4;
             this.treeViewRecords.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewRecords_AfterSelect);
             // 
@@ -170,7 +170,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pieChartControl1.Location = new System.Drawing.Point(12, 99);
             this.pieChartControl1.Name = "pieChartControl1";
-            this.pieChartControl1.Size = new System.Drawing.Size(265, 181);
+            this.pieChartControl1.Size = new System.Drawing.Size(265, 257);
             this.pieChartControl1.TabIndex = 6;
             // 
             // timerSecondUpdate
@@ -181,7 +181,7 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 286);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 362);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(588, 22);
             this.statusStrip1.TabIndex = 7;
@@ -191,13 +191,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(588, 308);
+            this.ClientSize = new System.Drawing.Size(588, 384);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.pieChartControl1);
             this.Controls.Add(this.groupBoxRecords);
             this.Controls.Add(this.groupBoxCurrentTask);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(604, 346);
+            this.MinimumSize = new System.Drawing.Size(604, 422);
             this.Name = "Main";
             this.Text = "Time Assist";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);

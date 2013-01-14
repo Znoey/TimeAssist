@@ -7,11 +7,14 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Microsoft.Xna.Framework;
 
 namespace TimeAssist.Controls
 {
     public partial class PieChartControl : UserControl
     {
+        public const float HourAngleSize = 30;
+
         List<Brush> pieChartBrushes = new List<Brush>();
 
         float[] angles;
@@ -21,10 +24,9 @@ namespace TimeAssist.Controls
 
         List<Record> recordsToDraw = new List<Record>();
 
-        public const float HourAngleSize = 30;
 
-        Rectangle pieRect;
-        Rectangle legendRect;
+        System.Drawing.Rectangle pieRect;
+        System.Drawing.Rectangle legendRect;
 
         public PieChartControl()
         {
@@ -49,7 +51,7 @@ namespace TimeAssist.Controls
             base.OnPaint(e);
             try
             {
-                AngleAndWordData(e);
+                //AngleAndWordData(e);
                 DrawRecordChart(e);
             }
             catch (Exception exc)
@@ -61,9 +63,9 @@ namespace TimeAssist.Controls
 
         private void AngleAndWordData(PaintEventArgs e)
         {
-            pieRect = new Rectangle(0, 0, Width / 2, Height / 2);
-            legendRect = new Rectangle(pieRect.Width, 0, Width / 2, Height / 2);
-            e.Graphics.FillRectangle(Brushes.White, new Rectangle(0, 0, Size.Width, Size.Height));
+            pieRect = new System.Drawing.Rectangle(0, 0, Width / 2, Height / 2);
+            legendRect = new System.Drawing.Rectangle(pieRect.Width, 0, Width / 2, Height / 2);
+            e.Graphics.FillRectangle(Brushes.White, new System.Drawing.Rectangle(0, 0, Size.Width, Size.Height));
 
             if (angles != null && angles.Length > 0)
             {
@@ -84,7 +86,7 @@ namespace TimeAssist.Controls
                 e.Graphics.FillPie(Brushes.Black, pieRect, nextAngle, sweepAngle);
             }
 
-            DrawClock(e);
+            DrawClock(e, pieRect);
 
             if (legendWords != null && legendWords.Length > 0)
             {
@@ -100,9 +102,15 @@ namespace TimeAssist.Controls
             }
         }
 
-        private void DrawClock(PaintEventArgs e)
+        private void DrawClock(PaintEventArgs e, System.Drawing.Rectangle r )
         {
             // TODO: Draw the clock around the pie chart.
+            float startAngle = 0;
+            for (int i = 0; i < 12; i++)
+            {
+                e.Graphics.DrawPie(Pens.Black, r, startAngle, HourAngleSize);
+                startAngle += HourAngleSize;
+            }
         }
 
         public void SetData(float[] angles, string[] tasks)
@@ -118,7 +126,25 @@ namespace TimeAssist.Controls
 
         private void DrawRecordChart(PaintEventArgs e)
         {
+            // start at 8 o'clock
+            float startAngle = (HourAngleSize * 8) - (HourAngleSize * 3);
+            float sweepAngle = 0;
+            pieRect = new System.Drawing.Rectangle(0, 0, Width / 2, Height / 2);
+            legendRect = new System.Drawing.Rectangle(pieRect.Width, 0, Width / 2, Height / 2);
 
+            PointF pt = new PointF(legendRect.X, legendRect.Y);
+
+            for (int i = 0; i < recordsToDraw.Count; i++ )
+            {
+                sweepAngle = Math.Abs((float)recordsToDraw[i].Duration.TotalHours * HourAngleSize);
+                e.Graphics.FillPie(GetPieChartBrush(i), pieRect, startAngle, sweepAngle);
+                startAngle += sweepAngle;
+
+                e.Graphics.DrawString(legendWords[i], Font, Brushes.Black, new PointF(pt.X + 1, pt.Y + 1));
+                e.Graphics.DrawString(legendWords[i], Font, GetPieChartBrush(i), pt);
+                pt.Y += Font.SizeInPoints + 2;
+            }
+            DrawClock(e, pieRect);
         }
 
         public void SetData(List<Record> records)
