@@ -30,5 +30,6 @@ namespace TimeAssist
         public string UserName { get { return textBoxUserName.Text; } }
         public string Password { get { return textBoxPassword.Text; } }
         public bool IsFilledOut { get { return textBoxUserName.Text.Length > 0 && textBoxPassword.Text.Length > 0; } }
+        public bool RememberMe { get { return checkBoxRememberMe.Checked; } }
     }
 }

@@ -146,11 +146,13 @@ namespace TimeAssist
                     Record r = new Record();
                     r.ReadXml(reader);
                     records[stackTime.ToString("d")].Add(r);
+                    records[stackTime.ToString("d")].Sort((Record a, Record b) =>
+                    {
+                        return a.Start.CompareTo(b.Start);
+                    });
                     //reader.ReadEndElement();
                 }
             }
-            // TODO: Read the history of the person's records.
-            //reader.ReadEndElement();
         }
 
         public void WriteXml(System.Xml.XmlWriter writer)

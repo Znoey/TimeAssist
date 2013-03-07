@@ -63,8 +63,26 @@ namespace TimeAssist
         {
             //LoadRecordsBinary("test.xml.bin");
             //LoadRecordsSoap("SoapTest.xml");
+            if (AppSettings.Instance.rememberLastLogin)
+            {
+                person = new Person(AppSettings.Instance.loginName, AppSettings.Instance.loginPassword);
+                try
+                {
+                    person.Load();
+                }
+                catch (System.Exception)
+                {
+                    person = new Person("unknown", "unknown");
+                }
 
-            ShowLoginDialog();
+                this.Text = "Time Assist [" + person.Name + "]";
+
+                UpdateForm(person);
+            }
+            else
+            {
+                ShowLoginDialog();
+            }
         }
 
 
@@ -77,13 +95,18 @@ namespace TimeAssist
                 person = new Person("unknown", "unknown");
                 return;
             }
-
+            if (dlgLogin.RememberMe)
+            {
+                AppSettings.Instance.loginName = dlgLogin.UserName;
+                AppSettings.Instance.loginPassword = dlgLogin.Password;
+                AppSettings.Instance.rememberLastLogin = true;
+            }
             person = new Person(dlgLogin.UserName, dlgLogin.Password);
             try
             {
                 person.Load();
             }
-            catch(System.Exception) 
+            catch (System.Exception)
             {
                 person = new Person("unknown", "unknown");
             }
@@ -130,27 +153,17 @@ namespace TimeAssist
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //SaveRecordsBinary("test.xml.bin");
-            //SaveRecordsSoap("SoapTest.xml");
+            try
+            {
+                AppSettings.Instance.SaveFile();
 
-            if (person != null)
-                person.Save();
-
-            //if (person == null)
-            //    return;
-            //try
-            //{
-
-            //    using (FileStream fs = File.Open(person.FileName, FileMode.Create ))
-            //    {
-            //        XmlSerializer xml = new XmlSerializer(person.GetType());
-            //        xml.Serialize(fs, person);
-            //    }
-            //}
-            //catch(Exception ex)
-            //{
-            //    Console.WriteLine(ex.Message);
-            //}
+                if (person != null)
+                    person.Save();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Something went wrong when closing. " + ex.Message);
+            }
         }
 
 
