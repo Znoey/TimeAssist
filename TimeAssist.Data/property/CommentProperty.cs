@@ -21,5 +21,14 @@ namespace TimeAssist.Data.Property
             Data = s;
             return this;
         }
+
+        public static implicit operator CommentProperty (string s)
+        {
+            return new CommentProperty(s.Replace("<comment>", "").Replace("</comment>", ""));
+        }
+        public static implicit operator string( CommentProperty cp)
+        {
+            return cp.ToString();
+        }
     }
 }

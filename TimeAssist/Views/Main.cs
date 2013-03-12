@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using TimeAssist.Views;
 
 namespace TimeAssist
 {
@@ -264,6 +265,7 @@ namespace TimeAssist
         {
             currentTask.Finish = DateTime.Now;
         }
+        #region treeViewRecords Events
 
         private void treeViewRecords_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -281,12 +283,70 @@ namespace TimeAssist
             }
         }
 
+        ContextMenuStrip treeViewContextMenu = null;
+        private void treeViewRecords_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (treeViewContextMenu == null)
+            {
+                treeViewContextMenu = new ContextMenuStrip();
+                treeViewContextMenu.Items.Add("Copy Comment");
+                treeViewContextMenu.Items.Add("Edit");
+                treeViewContextMenu.Items.Add("Post to Time Sheet.");
+                treeViewContextMenu.ItemClicked += new ToolStripItemClickedEventHandler(treeViewContextMenu_ItemClicked);
+            }
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                if (e.Node.Parent == null)
+                {
+                    return;
+                }
+
+                treeViewContextMenu.Show( treeViewRecords.PointToScreen(e.Location) );
+                treeViewRecords.SelectedNode = e.Node;
+            }
+        }
+
+        void treeViewContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (e.ClickedItem.Text == "Copy Comment")
+            {
+                var split = treeViewRecords.SelectedNode.Text.Split('#');
+                string comment = split[split.Length - 1];
+                Clipboard.SetText(comment);
+            }
+            else if (e.ClickedItem.Text == "Edit")
+            {
+                var record = person.Records[treeViewRecords.SelectedNode.Parent.Text][treeViewRecords.SelectedNode.Index];
+                EditRecordForm erf = new EditRecordForm(record);
+                if (erf.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
+                    person.Records[treeViewRecords.SelectedNode.Parent.Text][treeViewRecords.SelectedNode.Index] = erf.Record;
+                    UpdateForm(person);
+                }
+            }
+            else if (e.ClickedItem.Text == "Post to Time Sheet.")
+            {
+
+            }
+            treeViewContextMenu.Hide();
+        }
+
+        #endregion
+
         private void timerSecondUpdate_Tick(object sender, EventArgs e)
         {
             if (currentTask != null)
             {
                 textBox1.Text = currentTask.Task + " : " + Math.Abs((DateTime.Now - currentTask.Start).TotalHours).ToString("F2");
             }
+        }
+
+        private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (person != null)
+                person.Save();
+
+            ShowLoginDialog();
         }
     }
 }

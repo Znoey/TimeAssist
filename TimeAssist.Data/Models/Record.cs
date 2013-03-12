@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using TimeAssist.Data.Property;
 
 namespace TimeAssist
 {
@@ -34,8 +35,6 @@ namespace TimeAssist
         /// Get or set a comment to go with a task.
         /// </summary>
         public string Comment { get { return comment; } set { comment = value;}}
-
-
 
         #region Constructors
         
@@ -73,7 +72,6 @@ namespace TimeAssist
         }
 
         #endregion
-
 
         #region IXmlSerializable Interface
 
@@ -118,11 +116,12 @@ namespace TimeAssist
 
         #endregion
 
-
-
         private DateTime start;
         private DateTime finish;
         private string task;
         private string comment;
+
+        public List<AProperty> properties;
+
     }
 }

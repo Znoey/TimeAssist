@@ -17,6 +17,7 @@ namespace TimeAssist
         public string Password { get { return password; } }
         public string FileName { get { return recordFileName; } }
         public Dictionary<string, List<Record>> Records { get { return records; } }
+        
         public List<Record> TodaysRecords 
         { 
             get 
