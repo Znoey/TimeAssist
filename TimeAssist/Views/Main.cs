@@ -279,7 +279,8 @@ namespace TimeAssist
                 // Copies the comment to the clipbard to post to timesheet.
                 var split = e.Node.Text.Split('#');
                 string comment = split[split.Length - 1];
-                Clipboard.SetText(comment);
+                if( comment != null && comment.Length > 0 )
+                    Clipboard.SetText(comment);
             }
         }
 
@@ -310,9 +311,11 @@ namespace TimeAssist
         {
             if (e.ClickedItem.Text == "Copy Comment")
             {
+                // Copies the comment to the clipbard to post to timesheet.
                 var split = treeViewRecords.SelectedNode.Text.Split('#');
                 string comment = split[split.Length - 1];
-                Clipboard.SetText(comment);
+                if (comment != null && comment.Length > 0)
+                    Clipboard.SetText(comment);
             }
             else if (e.ClickedItem.Text == "Edit")
             {
@@ -320,7 +323,9 @@ namespace TimeAssist
                 EditRecordForm erf = new EditRecordForm(record);
                 if (erf.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
-                    person.Records[treeViewRecords.SelectedNode.Parent.Text][treeViewRecords.SelectedNode.Index] = erf.Record;
+                    person.Records[treeViewRecords.SelectedNode.Parent.Text].RemoveAt(treeViewRecords.SelectedNode.Index);
+                    person.AddRecord(record);
+                    //person.Records[record.Start.ToString("d")].Add(record);
                     UpdateForm(person);
                 }
             }

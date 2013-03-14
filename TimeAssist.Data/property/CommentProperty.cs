@@ -13,7 +13,7 @@ namespace TimeAssist.Data.Property
 
         public override string ToString()
         {
-            return "<comment>" + Data + "</comment>";
+            return Data;
         }
 
         public override AProperty FromString(string s)
@@ -24,7 +24,7 @@ namespace TimeAssist.Data.Property
 
         public static implicit operator CommentProperty (string s)
         {
-            return new CommentProperty(s.Replace("<comment>", "").Replace("</comment>", ""));
+            return new CommentProperty(s);
         }
         public static implicit operator string( CommentProperty cp)
         {

@@ -9,7 +9,7 @@ namespace TimeAssist.Data.Property
 
         public override string ToString()
         {
-            return "<task>" + Data + "</task>";
+            return Data;
         }
 
         public override AProperty FromString(string s)

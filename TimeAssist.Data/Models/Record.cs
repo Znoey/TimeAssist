@@ -9,7 +9,7 @@ using TimeAssist.Data.Property;
 namespace TimeAssist
 {
     [Serializable()]
-    public class Record : ISerializable, IXmlSerializable
+    public class Record : ISerializable, IXmlSerializable, IComparable<Record>
     {
         /// <summary>
         /// Returns the duration of time this task was worked on.
@@ -65,11 +65,41 @@ namespace TimeAssist
 
         protected Record(SerializationInfo info, StreamingContext context)
         {
+
+            int i = info.MemberCount;
+            var e = info.GetEnumerator();
+            while(e.MoveNext())
+            {
+                try
+                {
+                    if (e.Name == "Start")
+                    {
+                        properties.Add(new StartTimeProperty(DateTime.Parse(e.Value as string)));
+                    }
+                    else if (e.Name == "Finish")
+                    {
+                        properties.Add(new FinishTimeProperty(DateTime.Parse(e.Value as string)));
+                    }
+                    else if (e.Name == "Task")
+                    {
+                        properties.Add(new TaskProperty(e.Value as string));
+                    }
+                    else if (e.Name == "Comment")
+                    {
+                        properties.Add(new CommentProperty(e.Value as string));
+                    }
+                }
+                catch(Exception exc)
+                {
+                    Console.WriteLine(exc.Message);
+                }
+            }
             start = info.GetDateTime("Start");
             finish = info.GetDateTime("Finish");
             task = info.GetString("Task");
             comment = info.GetString("Comment");
         }
+
 
         #endregion
 
@@ -84,6 +114,7 @@ namespace TimeAssist
             start = finish = DateTime.Now;
             task = "";
             comment = "";
+            properties = new List<AProperty>();
         }
 
         public System.Xml.Schema.XmlSchema GetSchema()
@@ -93,12 +124,20 @@ namespace TimeAssist
 
         public void ReadXml(System.Xml.XmlReader reader)
         {
+            var tree = reader.ReadSubtree();
             //Console.WriteLine("Record reading xml");
-            start = DateTime.Parse(reader.GetAttribute("start"));
-            finish = DateTime.Parse(reader.GetAttribute("finish"));
+            if (reader.HasAttributes)
+            {
+                start = DateTime.Parse(reader.GetAttribute("start"));
+                properties.Add(new StartTimeProperty(start));
+                finish = DateTime.Parse(reader.GetAttribute("finish"));
+                properties.Add(new FinishTimeProperty(finish));
+            }
             reader.ReadStartElement();
             task = reader.ReadElementString("task");
+            properties.Add(new TaskProperty(task));
             comment = reader.ReadElementString("comment");
+            properties.Add(new CommentProperty(comment));
             reader.ReadEndElement();
         }
 
@@ -109,6 +148,13 @@ namespace TimeAssist
             writer.WriteAttributeString("start", Start.ToString());
             writer.WriteAttributeString("finish", Finish.ToString());
             writer.WriteAttributeString("duration", (Start - Finish).ToString());
+            if (properties.Count > 0)
+            {
+                foreach (var item in properties)
+                {
+                    writer.WriteElementString(item.GetType().ToString(), item.ToString());
+                }
+            }
             writer.WriteElementString("task", task);
             writer.WriteElementString("comment", comment);
             writer.WriteEndElement();
@@ -123,5 +169,18 @@ namespace TimeAssist
 
         public List<AProperty> properties;
 
+
+        public int CompareTo(Record other)
+        {
+            if (this.GetHashCode() == other.GetHashCode())
+                return 0;
+            var x = (this.start - other.start).Duration().TotalMilliseconds;
+            if (double.Epsilon + x >= 0 || double.Epsilon - x <= 0)
+                return 0;
+            if (x > 0)
+                return 1;
+            else
+                return -1;
+        }
     }
 }

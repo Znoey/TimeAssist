@@ -97,7 +97,7 @@ namespace TimeAssist
 
         public void AddRecord(Record recordToAdd)
         {
-            string key = DateTime.Today.ToString("d");
+            string key = recordToAdd.Start.ToString("d");
             if (!records.ContainsKey(key))
             {
                 records.Add(key, new List<Record>());
