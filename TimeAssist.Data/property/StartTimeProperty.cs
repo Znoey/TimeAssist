@@ -7,6 +7,10 @@ namespace TimeAssist.Data.Property
 {
     public class StartTimeProperty : GenericProperty<DateTime>
     {
+        public StartTimeProperty()
+        {
+
+        }
         public StartTimeProperty(DateTime startTime)
             : base(startTime)
         { }

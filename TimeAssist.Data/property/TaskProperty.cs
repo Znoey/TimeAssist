@@ -3,6 +3,10 @@ namespace TimeAssist.Data.Property
 {
     public class TaskProperty : GenericProperty<string>
     {
+        public TaskProperty()
+        {
+
+        }
         public TaskProperty(string task)
             : base(task)
         { }

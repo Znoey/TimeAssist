@@ -7,6 +7,10 @@ namespace TimeAssist.Data.Property
 {
     public class FinishTimeProperty : GenericProperty<DateTime>
     {
+        public FinishTimeProperty()
+        {
+
+        }
         public FinishTimeProperty(DateTime finishTime)
             : base(finishTime)
         { }

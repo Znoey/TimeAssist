@@ -14,27 +14,108 @@ namespace TimeAssist
         /// <summary>
         /// Returns the duration of time this task was worked on.
         /// </summary>
-        public float Duration { get { return Math.Abs((float)(start - finish).TotalHours); } }
+        public float Duration { 
+            get
+            {
+                StartTimeProperty stp = null;
+                FinishTimeProperty ftp = null;
+                foreach (var p in properties)
+                {
+                    if (p.GetType() == typeof(StartTimeProperty))
+                        stp = p as StartTimeProperty;
+                    if (p.GetType() == typeof(FinishTimeProperty))
+                        ftp = p as FinishTimeProperty;
+                }
+                if (stp != null && ftp != null)
+                {
+                    return Math.Abs((float)(stp.Data - ftp.Data).TotalHours);
+                }
+                else if (stp != null && ftp == null)
+                {
+                    return Math.Abs((float)(stp.Data - DateTime.Now).TotalHours);
+                }
+                else
+                {
+                    return 0;
+                }
+            } 
+        }
 
         /// <summary>
         /// get or set the value for when this task was started.
         /// </summary>
-        public DateTime Start { get { return start; } set { start = value; } }
+        public DateTime Start
+        {
+            get
+            {
+                foreach (var p in properties)
+                {
+                    if (p.GetType() == typeof(StartTimeProperty))
+                    {
+                        StartTimeProperty stp = p as StartTimeProperty;
+                        return stp.Data;
+                    }
+                } 
+                return DateTime.Now;
+            }
+            set { start = value; }
+        }
 
         /// <summary>
         /// get or set the value for when this task was finished.
         /// </summary>
-        public DateTime Finish { get { return finish; } set { finish = value; } }
+        public DateTime Finish
+        {
+            get
+            {
+                foreach (var p in properties)
+                {
+                    if (p.GetType() == typeof(FinishTimeProperty))
+                    {
+                        FinishTimeProperty stp = p as FinishTimeProperty;
+                        return stp.Data;
+                    }
+                }
+                return DateTime.Now;
+            }
+            set { finish = value; }
+        }
 
         /// <summary>
         /// Get or Set the string value for a task to represent this record as.
         /// </summary>
-        public string Task { get { return task; } set{ task = value; }}
+        public string Task 
+        { 
+            get
+            {
+                string s = "";
+                foreach (var p in properties)
+                {
+                    if (p.GetType() == typeof(TaskProperty))
+                        s += p.Data;
+                }
+                return s; 
+            } 
+            set{ task = value; }
+        }
 
         /// <summary>
         /// Get or set a comment to go with a task.
         /// </summary>
-        public string Comment { get { return comment; } set { comment = value;}}
+        public string Comment 
+        { 
+            get
+            {
+                string s = "";
+                foreach (var p in properties)
+                {
+                    if (p.GetType() == typeof(CommentProperty))
+                        s += p.Data + "  ";
+                }
+                return s; 
+            } 
+            set { comment = value;}
+        }
 
         #region Constructors
         
@@ -124,39 +205,74 @@ namespace TimeAssist
 
         public void ReadXml(System.Xml.XmlReader reader)
         {
-            var tree = reader.ReadSubtree();
             //Console.WriteLine("Record reading xml");
-            if (reader.HasAttributes)
+            bool bOldStyle = reader.HasAttributes;
+
+            if (bOldStyle)
             {
                 start = DateTime.Parse(reader.GetAttribute("start"));
                 properties.Add(new StartTimeProperty(start));
                 finish = DateTime.Parse(reader.GetAttribute("finish"));
                 properties.Add(new FinishTimeProperty(finish));
+                reader.ReadStartElement();
+                task = reader.ReadElementString("task");
+                properties.Add(new TaskProperty(task));
+                comment = reader.ReadElementString("comment");
+                properties.Add(new CommentProperty(comment));
+                reader.ReadEndElement();
             }
-            reader.ReadStartElement();
-            task = reader.ReadElementString("task");
-            properties.Add(new TaskProperty(task));
-            comment = reader.ReadElementString("comment");
-            properties.Add(new CommentProperty(comment));
-            reader.ReadEndElement();
+            else
+            {
+                while (reader.Read())
+                {
+                    if (reader.Name == "record" && reader.NodeType == System.Xml.XmlNodeType.EndElement)
+                    {
+                        break;
+                    }
+                    if (reader.Name == "StartTimeProperty" && reader.NodeType == System.Xml.XmlNodeType.Element)
+                    {
+                        properties.Add(ReadProperty<StartTimeProperty>(reader));
+                    }
+                    if (reader.Name == "FinishTimeProperty" && reader.NodeType == System.Xml.XmlNodeType.Element)
+                    {
+                        properties.Add(ReadProperty<FinishTimeProperty>(reader));
+                    }
+                    if (reader.Name == "TaskProperty" && reader.NodeType == System.Xml.XmlNodeType.Element)
+                    {
+                        properties.Add(ReadProperty<TaskProperty>(reader));
+                    }
+                    if (reader.Name == "CommentProperty" && reader.NodeType == System.Xml.XmlNodeType.Element)
+                    {
+                        properties.Add(ReadProperty<CommentProperty>(reader));
+                    }
+                }
+            }
+        }
+
+        public T ReadProperty<T>(System.Xml.XmlReader reader) where T :  AProperty, new()
+        {
+            if (reader.Name == typeof(T).Name && reader.NodeType == System.Xml.XmlNodeType.Element)
+            {
+                T prop = new T();
+                reader.Read();
+                prop.FromString(reader.Value);
+                reader.Read();
+                return prop;
+            }
+            return null;
         }
 
         public void WriteXml(System.Xml.XmlWriter writer)
         {
             //Console.WriteLine("Record writing xml");
             writer.WriteStartElement("record");
-            writer.WriteAttributeString("start", Start.ToString());
-            writer.WriteAttributeString("finish", Finish.ToString());
-            writer.WriteAttributeString("duration", (Start - Finish).ToString());
             if (properties.Count > 0)
             {
                 foreach (var item in properties)
                 {
-                    writer.WriteElementString(item.GetType().ToString(), item.ToString());
+                    writer.WriteElementString(item.GetType().Name, item.ToString());
                 }
             }
-            writer.WriteElementString("task", task);
-            writer.WriteElementString("comment", comment);
             writer.WriteEndElement();
         }
 

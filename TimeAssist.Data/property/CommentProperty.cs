@@ -7,6 +7,10 @@ namespace TimeAssist.Data.Property
 {
     public class CommentProperty : GenericProperty<string>
     {
+        public CommentProperty()
+        {
+
+        }
         public CommentProperty(string comment)
             : base(comment)
         { }

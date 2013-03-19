@@ -7,6 +7,10 @@ namespace TimeAssist.Data.Property
 {
     public abstract class AProperty
     {
+        public AProperty()
+        {
+            Data = null;
+        }
         public object Data { get; set; }
 
         public AProperty(object Data)
@@ -19,7 +23,10 @@ namespace TimeAssist.Data.Property
 
     public abstract class GenericProperty<T> : AProperty
     {
-
+        public GenericProperty()
+        {
+            Data = default(T);
+        }
         new public T Data
         {
             get { return (T)base.Data; }
