@@ -117,6 +117,9 @@ namespace TimeAssist
                 string s = "";
                 foreach (var item in comments)
                     s += item.Data + "\n";
+                int i = s.IndexOf(value);
+                if (i != -1)
+                    s = s.Remove(i, value.Length + 1);
                 s += value;
 
                 properties.RemoveAll(a => a.GetType() == typeof(CommentProperty));
@@ -217,15 +220,11 @@ namespace TimeAssist
 
             if (bOldStyle)
             {
-                start = DateTime.Parse(reader.GetAttribute("start"));
-                properties.Add(new StartTimeProperty(start));
-                finish = DateTime.Parse(reader.GetAttribute("finish"));
-                properties.Add(new FinishTimeProperty(finish));
+                properties.Add(new StartTimeProperty().FromString(reader.GetAttribute("start")));
+                properties.Add(new FinishTimeProperty().FromString(reader.GetAttribute("finish")));
                 reader.ReadStartElement();
-                task = reader.ReadElementString("task");
-                properties.Add(new TaskProperty(task));
-                comment = reader.ReadElementString("comment");
-                properties.Add(new CommentProperty(comment));
+                properties.Add(new TaskProperty(reader.ReadElementString("task")));
+                properties.Add(new CommentProperty(reader.ReadElementString("comment")));
                 reader.ReadEndElement();
             }
             else
