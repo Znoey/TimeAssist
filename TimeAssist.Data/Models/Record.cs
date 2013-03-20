@@ -17,15 +17,8 @@ namespace TimeAssist
         public float Duration { 
             get
             {
-                StartTimeProperty stp = null;
-                FinishTimeProperty ftp = null;
-                foreach (var p in properties)
-                {
-                    if (p.GetType() == typeof(StartTimeProperty))
-                        stp = p as StartTimeProperty;
-                    if (p.GetType() == typeof(FinishTimeProperty))
-                        ftp = p as FinishTimeProperty;
-                }
+                StartTimeProperty stp = Find<StartTimeProperty>();
+                FinishTimeProperty ftp = Find<FinishTimeProperty>();
                 if (stp != null && ftp != null)
                 {
                     return Math.Abs((float)(stp.Data - ftp.Data).TotalHours);
@@ -48,17 +41,17 @@ namespace TimeAssist
         {
             get
             {
-                foreach (var p in properties)
-                {
-                    if (p.GetType() == typeof(StartTimeProperty))
-                    {
-                        StartTimeProperty stp = p as StartTimeProperty;
-                        return stp.Data;
-                    }
-                } 
+                var stp = Find<StartTimeProperty>();
+                if (stp != null)
+                    return stp.Data;
                 return DateTime.Now;
             }
-            set { start = value; }
+            set 
+            {
+                var stp = Find<StartTimeProperty>();
+                if (stp != null)
+                    stp.Data = value;
+            }
         }
 
         /// <summary>
@@ -68,17 +61,17 @@ namespace TimeAssist
         {
             get
             {
-                foreach (var p in properties)
-                {
-                    if (p.GetType() == typeof(FinishTimeProperty))
-                    {
-                        FinishTimeProperty stp = p as FinishTimeProperty;
-                        return stp.Data;
-                    }
-                }
+                var ftp = Find<FinishTimeProperty>();
+                if (ftp != null)
+                    return ftp.Data;
                 return DateTime.Now;
             }
-            set { finish = value; }
+            set 
+            {
+                var ftp = Find<FinishTimeProperty>();
+                if (ftp != null)
+                    ftp.Data = value;
+            }
         }
 
         /// <summary>
@@ -88,15 +81,19 @@ namespace TimeAssist
         { 
             get
             {
-                string s = "";
-                foreach (var p in properties)
-                {
-                    if (p.GetType() == typeof(TaskProperty))
-                        s += p.Data;
-                }
-                return s; 
+                var task = Find<TaskProperty>();
+                if( task != null )
+                    return task.Data;
+                return "";
             } 
-            set{ task = value; }
+            set
+            {
+                var task = Find<TaskProperty>();
+                if (task != null)
+                    task.Data = value;
+                else
+                    properties.Add(new TaskProperty(value));
+            }
         }
 
         /// <summary>
@@ -106,15 +103,25 @@ namespace TimeAssist
         { 
             get
             {
+                var comments = FindAll<CommentProperty>();
+
                 string s = "";
-                foreach (var p in properties)
-                {
-                    if (p.GetType() == typeof(CommentProperty))
-                        s += p.Data + "  ";
-                }
+                foreach (var item in comments)
+                    s += item.Data;
                 return s; 
             } 
-            set { comment = value;}
+            set
+            {
+                var comments = FindAll<CommentProperty>();
+
+                string s = "";
+                foreach (var item in comments)
+                    s += item.Data + "\n";
+                s += value;
+
+                properties.RemoveAll(a => a.GetType() == typeof(CommentProperty));
+                properties.Add(new CommentProperty(s));
+            }
         }
 
         #region Constructors
@@ -285,6 +292,30 @@ namespace TimeAssist
 
         public List<AProperty> properties;
 
+
+        public T Find<T>() where T : AProperty, new()
+        {
+            foreach (var property in properties)
+            {
+                if (property.GetType().IsAssignableFrom(typeof(T)))
+                {
+                    return property as T;
+                }
+            }
+            return null;
+        }
+        public List<T> FindAll<T>() where T : AProperty, new()
+        {
+            List<T> all = new List<T>();
+            foreach (var property in properties)
+            {
+                if (property.GetType().IsAssignableFrom(typeof(T)))
+                {
+                    all.Add(property as T);
+                }
+            }
+            return all;
+        }
 
         public int CompareTo(Record other)
         {

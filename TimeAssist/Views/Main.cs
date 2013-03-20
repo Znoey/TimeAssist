@@ -292,6 +292,7 @@ namespace TimeAssist
                 treeViewContextMenu = new ContextMenuStrip();
                 treeViewContextMenu.Items.Add("Copy Comment");
                 treeViewContextMenu.Items.Add("Edit");
+                treeViewContextMenu.Items.Add("Delete");
                 treeViewContextMenu.Items.Add("Post to Time Sheet.");
                 treeViewContextMenu.ItemClicked += new ToolStripItemClickedEventHandler(treeViewContextMenu_ItemClicked);
             }
@@ -328,6 +329,11 @@ namespace TimeAssist
                     //person.Records[record.Start.ToString("d")].Add(record);
                     UpdateForm(person);
                 }
+            }
+            else if (e.ClickedItem.Text == "Delete")
+            {
+                person.Records[treeViewRecords.SelectedNode.Parent.Text].RemoveAt(treeViewRecords.SelectedNode.Index);
+                UpdateForm(person);
             }
             else if (e.ClickedItem.Text == "Post to Time Sheet.")
             {

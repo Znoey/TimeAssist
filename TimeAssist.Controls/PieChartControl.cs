@@ -85,6 +85,7 @@ namespace TimeAssist.Controls
             for (int i = 0; i < recordsToDraw.Count; i++ )
             {
                 sweepAngle = recordsToDraw[i].Duration * HourAngleSize;
+                startAngle = GetStartAngle(recordsToDraw[i]);
                 e.Graphics.FillPie(GetPieChartBrush(i), pieRect, startAngle, sweepAngle);
                 startAngle += sweepAngle;
 
@@ -93,6 +94,14 @@ namespace TimeAssist.Controls
                 pt.Y += Font.SizeInPoints + 2;
             }
             DrawClock(e, pieRect);
+        }
+
+        private float GetStartAngle(Record record)
+        {
+            var start = record.Start;
+            var end = record.Finish;
+            float angle = ((HourAngleSize * start.Hour) - (HourAngleSize * 3)) + ((float)start.Minute / 60.0f * HourAngleSize);
+            return angle;
         }
 
         public void SetData(List<Record> records)
