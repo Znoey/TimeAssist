@@ -51,6 +51,8 @@ namespace TimeAssist
                 var stp = Find<StartTimeProperty>();
                 if (stp != null)
                     stp.Data = value;
+                else
+                    properties.Add(new StartTimeProperty(value));
             }
         }
 
@@ -71,6 +73,8 @@ namespace TimeAssist
                 var ftp = Find<FinishTimeProperty>();
                 if (ftp != null)
                     ftp.Data = value;
+                else
+                    properties.Add(new FinishTimeProperty(value));
             }
         }
 
@@ -118,7 +122,7 @@ namespace TimeAssist
                 foreach (var item in comments)
                     s += item.Data + "\n";
                 int i = s.IndexOf(value);
-                if (i != -1)
+                if (i != -1 && value.Length != 0 && s.Length != 0)
                     s = s.Remove(i, value.Length + 1);
                 s += value;
 
@@ -132,14 +136,14 @@ namespace TimeAssist
         public Record(string _task)
             : this(_task, "")
         {
-            start = finish = DateTime.Now;
+            Start = Finish = DateTime.Now;
         }
 
         public Record(string _task, string _comment)
         {
-            start = finish = DateTime.Now;
-            task = _task;
-            comment = _comment;
+            Start = Finish = DateTime.Now;
+            Task = _task;
+            Comment = _comment;
         }
 
         #endregion
@@ -202,11 +206,17 @@ namespace TimeAssist
         /// </summary>
         public Record()
         {
-            start = finish = DateTime.Now;
-            task = "";
-            comment = "";
             properties = new List<AProperty>();
         }
+
+        //public Record(Record other)
+        //{
+        //    properties = new List<AProperty>();
+        //    foreach (var item in other.properties)
+        //    {
+        //        this.properties.Add(item);
+        //    }
+        //}
 
         public System.Xml.Schema.XmlSchema GetSchema()
         {
@@ -291,7 +301,11 @@ namespace TimeAssist
 
         public List<AProperty> properties;
 
-
+        /// <summary>
+        /// Retrieves a proprty of type T in the list.  Null if not found.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public T Find<T>() where T : AProperty, new()
         {
             foreach (var property in properties)
@@ -303,6 +317,12 @@ namespace TimeAssist
             }
             return null;
         }
+
+        /// <summary>
+        /// Retrieves all properties of type T in the list.  Empty list if none found.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public List<T> FindAll<T>() where T : AProperty, new()
         {
             List<T> all = new List<T>();

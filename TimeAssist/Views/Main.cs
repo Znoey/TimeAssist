@@ -136,7 +136,13 @@ namespace TimeAssist
                         });
                     foreach (var task in sorted)
                     {
-                        node.Nodes.Add(FormatTreeViewString(task));
+                        TreeNode record = new TreeNode();
+                        record.Text = task.Duration.ToString("F2") + " - " + task.Task;
+                        foreach (var item in task.properties)
+                        {
+                            record.Nodes.Add(item.GetType().Name + " - " + item.Data.ToString());
+                        }
+                        node.Nodes.Add(record);
                     }
                 }
             }
@@ -174,7 +180,11 @@ namespace TimeAssist
             dlgAddTask.Text = "Start a New Task.";
             if (dlgAddTask.ShowDialog() == DialogResult.OK)
             {
-                currentTask = dlgAddTask.RecordInfo;
+                currentTask = new Record();
+                currentTask.Start = dlgAddTask.RecordInfo.Start;
+                currentTask.Finish = dlgAddTask.RecordInfo.Finish;
+                currentTask.Task = dlgAddTask.RecordInfo.Task;
+                currentTask.Comment = dlgAddTask.RecordInfo.Comment;
                 textBox1.Text = currentTask.Task;
             }
         }
@@ -276,6 +286,16 @@ namespace TimeAssist
             }
             else
             {
+                if (e.Node.Parent.Parent == null)
+                {
+                    DateTime dat = DateTime.Parse(e.Node.Parent.Text);
+                    pieChartControl1.SetData(person.Records[dat.ToString("d")]);
+                }
+                else if (e.Node.Parent.Parent.Parent == null)
+                {
+                    DateTime dat = DateTime.Parse(e.Node.Parent.Parent.Text);
+                    pieChartControl1.SetData(person.Records[dat.ToString("d")]);
+                }
                 // Copies the comment to the clipbard to post to timesheet.
                 var split = e.Node.Text.Split('#');
                 string comment = split[split.Length - 1];
@@ -299,6 +319,10 @@ namespace TimeAssist
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
                 if (e.Node.Parent == null)
+                {
+                    return;
+                }
+                else if (e.Node.Parent.Parent != null)
                 {
                     return;
                 }
@@ -348,7 +372,8 @@ namespace TimeAssist
         {
             if (currentTask != null)
             {
-                textBox1.Text = currentTask.Task + " : " + Math.Abs((DateTime.Now - currentTask.Start).TotalHours).ToString("F2");
+                var d = DateTime.Now - currentTask.Start;
+                textBox1.Text = string.Format("{0} [{0}:{1}:{2}]", currentTask.Task, d.Hours, d.Minutes, d.Seconds);
             }
         }
 

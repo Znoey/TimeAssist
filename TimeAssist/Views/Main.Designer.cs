@@ -39,7 +39,6 @@
             this.groupBoxCurrentTask = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttonFinishTask = new System.Windows.Forms.Button();
-            this.groupBoxRecords = new System.Windows.Forms.GroupBox();
             this.treeViewRecords = new System.Windows.Forms.TreeView();
             this.userControl11 = new TimeAssist.Controls.PieChartControl();
             this.pieChartControl1 = new TimeAssist.Controls.PieChartControl();
@@ -47,10 +46,14 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.notifyContextMenu.SuspendLayout();
             this.groupBoxCurrentTask.SuspendLayout();
-            this.groupBoxRecords.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // notifyIcon
@@ -138,24 +141,12 @@
             this.buttonFinishTask.UseVisualStyleBackColor = true;
             this.buttonFinishTask.Click += new System.EventHandler(this.OnClickFinishTask);
             // 
-            // groupBoxRecords
-            // 
-            this.groupBoxRecords.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxRecords.Controls.Add(this.treeViewRecords);
-            this.groupBoxRecords.Location = new System.Drawing.Point(283, 12);
-            this.groupBoxRecords.Name = "groupBoxRecords";
-            this.groupBoxRecords.Size = new System.Drawing.Size(293, 347);
-            this.groupBoxRecords.TabIndex = 5;
-            this.groupBoxRecords.TabStop = false;
-            this.groupBoxRecords.Text = "All Records";
-            // 
             // treeViewRecords
             // 
             this.treeViewRecords.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeViewRecords.Location = new System.Drawing.Point(3, 16);
+            this.treeViewRecords.Location = new System.Drawing.Point(3, 3);
             this.treeViewRecords.Name = "treeViewRecords";
-            this.treeViewRecords.Size = new System.Drawing.Size(287, 328);
+            this.treeViewRecords.Size = new System.Drawing.Size(287, 311);
             this.treeViewRecords.TabIndex = 4;
             this.treeViewRecords.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewRecords_AfterSelect);
             this.treeViewRecords.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewRecords_NodeMouseClick);
@@ -211,14 +202,45 @@
             this.logOutToolStripMenuItem.Text = "Log out";
             this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOutToolStripMenuItem_Click);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(287, 13);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(301, 343);
+            this.tabControl1.TabIndex = 8;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.treeViewRecords);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(293, 317);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "All Records";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(293, 317);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(588, 384);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.pieChartControl1);
-            this.Controls.Add(this.groupBoxRecords);
             this.Controls.Add(this.groupBoxCurrentTask);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(604, 422);
@@ -229,9 +251,10 @@
             this.notifyContextMenu.ResumeLayout(false);
             this.groupBoxCurrentTask.ResumeLayout(false);
             this.groupBoxCurrentTask.PerformLayout();
-            this.groupBoxRecords.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,7 +271,6 @@
         private System.Windows.Forms.Button buttonFinishTask;
         private System.Windows.Forms.ToolStripMenuItem finishTaskToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.GroupBox groupBoxRecords;
         private System.Windows.Forms.TreeView treeViewRecords;
         private TimeAssist.Controls.PieChartControl userControl11;
         private TimeAssist.Controls.PieChartControl pieChartControl1;
@@ -256,6 +278,9 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem logOutToolStripMenuItem;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }
 
