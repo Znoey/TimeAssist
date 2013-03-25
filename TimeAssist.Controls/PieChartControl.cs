@@ -22,13 +22,14 @@ namespace TimeAssist.Controls
         List<Record> recordsToDraw = new List<Record>();
 
 
-        System.Drawing.Rectangle pieRect;
+        System.Drawing.Rectangle pieRect = new System.Drawing.Rectangle(0, 0, 92, 92);
         System.Drawing.Rectangle legendRect;
 
         public PieChartControl()
         {
             InitializeComponent();
             ResetPens();
+            this.MinimumSize = new Size(pieRect.Height, pieRect.Width * 2);
         }
 
         private void ResetPens()
@@ -77,10 +78,11 @@ namespace TimeAssist.Controls
             // start at 8 o'clock
             float startAngle = (HourAngleSize * 8) - (HourAngleSize * 3);
             float sweepAngle = 0;
-            pieRect = new System.Drawing.Rectangle(0, 0, Width / 2, Height / 2);
+            //pieRect = new System.Drawing.Rectangle(0, 0, Width / 2, Height / 2);
             legendRect = new System.Drawing.Rectangle(pieRect.Width, 0, Width / 2, Height / 2);
 
             PointF pt = new PointF(legendRect.X, legendRect.Y);
+            e.Graphics.FillRectangle(Brushes.White, new RectangleF(pt.X, pt.Y, Size.Width - pt.X, Size.Height));
 
             for (int i = 0; i < recordsToDraw.Count; i++ )
             {

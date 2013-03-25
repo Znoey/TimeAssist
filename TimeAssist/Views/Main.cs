@@ -10,17 +10,19 @@ namespace TimeAssist
         /// <summary>
         /// The current task the user is working on.
         /// </summary>
-        Record currentTask = null;
+        Record m_rCurrentRecord = null;
+
+        List<Record> m_lCurrent = null;
 
         /// <summary>
         /// Who are you?!  At least tell me your name and password...
         /// </summary>
-        Person person = null;
+        Person m_pPerson = null;
 
         /// <summary>
         /// Our login form when we need to get a user name and password.
         /// </summary>
-        LoginForm dlgLogin = null;
+        LoginForm m_dlgLogin = null;
 
         public Main()
         {
@@ -35,6 +37,7 @@ namespace TimeAssist
             notifyIcon.Visible = true;
             notifyIcon.MouseDoubleClick += new MouseEventHandler(notifyIcon_MouseDoubleClick);
 
+            m_lCurrent = new List<Record>();
             // record control
             //recordControl.OnStartClicked += new Action(recordControl_OnStartClicked);
             //recordControl.OnFinishClicked += new Action(recordControl_OnFinishClicked);
@@ -44,7 +47,7 @@ namespace TimeAssist
         {
             //currentTask = recordControl.Record;
             //person.AddRecord(recordControl.Record);
-            UpdateForm(person);
+            UpdateForm(m_pPerson);
         }
 
         void recordControl_OnStartClicked()
@@ -66,19 +69,19 @@ namespace TimeAssist
             //LoadRecordsSoap("SoapTest.xml");
             if (AppSettings.Instance.rememberLastLogin)
             {
-                person = new Person(AppSettings.Instance.loginName, AppSettings.Instance.loginPassword);
+                m_pPerson = new Person(AppSettings.Instance.loginName, AppSettings.Instance.loginPassword);
                 try
                 {
-                    person.Load();
+                    m_pPerson.Load();
                 }
                 catch (System.Exception)
                 {
-                    person = new Person("unknown", "unknown");
+                    m_pPerson = new Person("unknown", "unknown");
                 }
 
-                this.Text = "Time Assist [" + person.Name + "]";
+                this.Text = "Time Assist [" + m_pPerson.Name + "]";
 
-                UpdateForm(person);
+                UpdateForm(m_pPerson);
             }
             else
             {
@@ -89,32 +92,32 @@ namespace TimeAssist
 
         void dlgLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            dlgLogin.FormClosing -= dlgLogin_FormClosing;
+            m_dlgLogin.FormClosing -= dlgLogin_FormClosing;
 
-            if (!dlgLogin.IsFilledOut)
+            if (!m_dlgLogin.IsFilledOut)
             {
-                person = new Person("unknown", "unknown");
+                m_pPerson = new Person("unknown", "unknown");
                 return;
             }
-            if (dlgLogin.RememberMe)
+            if (m_dlgLogin.RememberMe)
             {
-                AppSettings.Instance.loginName = dlgLogin.UserName;
-                AppSettings.Instance.loginPassword = dlgLogin.Password;
+                AppSettings.Instance.loginName = m_dlgLogin.UserName;
+                AppSettings.Instance.loginPassword = m_dlgLogin.Password;
                 AppSettings.Instance.rememberLastLogin = true;
             }
-            person = new Person(dlgLogin.UserName, dlgLogin.Password);
+            m_pPerson = new Person(m_dlgLogin.UserName, m_dlgLogin.Password);
             try
             {
-                person.Load();
+                m_pPerson.Load();
             }
             catch (System.Exception)
             {
-                person = new Person("unknown", "unknown");
+                m_pPerson = new Person("unknown", "unknown");
             }
 
-            this.Text = "Time Assist [" + person.Name + "]";
+            this.Text = "Time Assist [" + m_pPerson.Name + "]";
 
-            UpdateForm(person);
+            UpdateForm(m_pPerson);
         }
 
         private void UpdateForm(Person p)
@@ -153,9 +156,9 @@ namespace TimeAssist
         /// </summary>
         private void ShowLoginDialog()
         {
-            dlgLogin = new LoginForm();
-            dlgLogin.Show(this);
-            dlgLogin.FormClosing += new FormClosingEventHandler(dlgLogin_FormClosing);
+            m_dlgLogin = new LoginForm();
+            m_dlgLogin.Show(this);
+            m_dlgLogin.FormClosing += new FormClosingEventHandler(dlgLogin_FormClosing);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -164,8 +167,8 @@ namespace TimeAssist
             {
                 AppSettings.Instance.SaveFile();
 
-                if (person != null)
-                    person.Save();
+                if (m_pPerson != null)
+                    m_pPerson.Save();
             }
             catch (Exception ex)
             {
@@ -180,33 +183,33 @@ namespace TimeAssist
             dlgAddTask.Text = "Start a New Task.";
             if (dlgAddTask.ShowDialog() == DialogResult.OK)
             {
-                currentTask = new Record();
-                currentTask.Start = dlgAddTask.RecordInfo.Start;
-                currentTask.Finish = dlgAddTask.RecordInfo.Finish;
-                currentTask.Task = dlgAddTask.RecordInfo.Task;
-                currentTask.Comment = dlgAddTask.RecordInfo.Comment;
-                textBox1.Text = currentTask.Task;
+                m_rCurrentRecord = new Record();
+                m_rCurrentRecord.Start = dlgAddTask.RecordInfo.Start;
+                m_rCurrentRecord.Finish = dlgAddTask.RecordInfo.Finish;
+                m_rCurrentRecord.Task = dlgAddTask.RecordInfo.Task;
+                m_rCurrentRecord.Comment = dlgAddTask.RecordInfo.Comment;
+                textBox1.Text = m_rCurrentRecord.Task;
             }
         }
 
         private void OnClickFinishTask(object sender, EventArgs e)
         {
-            if (currentTask != null)
+            if (m_rCurrentRecord != null)
             {
                 AddTask dlgAddTask = new AddTask();
                 dlgAddTask.Text = "Finish Current Task.";
-                dlgAddTask.RecordInfo = currentTask;
-                dlgAddTask.Comment = currentTask.Comment;
-                dlgAddTask.Task = currentTask.Task;
+                dlgAddTask.RecordInfo = m_rCurrentRecord;
+                dlgAddTask.Comment = m_rCurrentRecord.Comment;
+                dlgAddTask.Task = m_rCurrentRecord.Task;
                 dlgAddTask.ButtonText = "Finish Task";
                 if (dlgAddTask.ShowDialog() == DialogResult.OK)
                 {
-                    currentTask.Task = dlgAddTask.Task;
-                    currentTask.Comment = dlgAddTask.Comment;
-                    currentTask.Finish = DateTime.Now;
-                    person.AddRecord(currentTask);
-                    UpdateForm(person);
-                    currentTask = null;
+                    m_rCurrentRecord.Task = dlgAddTask.Task;
+                    m_rCurrentRecord.Comment = dlgAddTask.Comment;
+                    m_rCurrentRecord.Finish = DateTime.Now;
+                    m_pPerson.AddRecord(m_rCurrentRecord);
+                    UpdateForm(m_pPerson);
+                    m_rCurrentRecord = null;
                     textBox1.Text = "No Current Task.";
                     return;
                 }
@@ -257,23 +260,23 @@ namespace TimeAssist
         /// </summary>
         private void FinishOffCurrentTask()
         {
-            if (currentTask != null)
+            if (m_rCurrentRecord != null)
             {
                 // TODO: Finish off the current task first;
-                currentTask.Finish = DateTime.Now;
-                person.AddRecord(currentTask);
-                currentTask = null;
+                m_rCurrentRecord.Finish = DateTime.Now;
+                m_pPerson.AddRecord(m_rCurrentRecord);
+                m_rCurrentRecord = null;
             }
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            currentTask.Start = currentTask.Finish = DateTime.Now;
+            m_rCurrentRecord.Start = m_rCurrentRecord.Finish = DateTime.Now;
         }
 
         private void buttonFinish_Click(object sender, EventArgs e)
         {
-            currentTask.Finish = DateTime.Now;
+            m_rCurrentRecord.Finish = DateTime.Now;
         }
         #region treeViewRecords Events
 
@@ -282,19 +285,19 @@ namespace TimeAssist
             if (e.Node.Parent == null)
             {
                 DateTime date = DateTime.Parse(e.Node.Text);                
-                pieChartControl1.SetData(person.Records[date.ToString("d")]);
+                pieChartControl1.SetData(m_pPerson.Records[date.ToString("d")]);
             }
             else
             {
                 if (e.Node.Parent.Parent == null)
                 {
                     DateTime dat = DateTime.Parse(e.Node.Parent.Text);
-                    pieChartControl1.SetData(person.Records[dat.ToString("d")]);
+                    pieChartControl1.SetData(m_pPerson.Records[dat.ToString("d")]);
                 }
                 else if (e.Node.Parent.Parent.Parent == null)
                 {
                     DateTime dat = DateTime.Parse(e.Node.Parent.Parent.Text);
-                    pieChartControl1.SetData(person.Records[dat.ToString("d")]);
+                    pieChartControl1.SetData(m_pPerson.Records[dat.ToString("d")]);
                 }
                 // Copies the comment to the clipbard to post to timesheet.
                 var split = e.Node.Text.Split('#');
@@ -344,20 +347,20 @@ namespace TimeAssist
             }
             else if (e.ClickedItem.Text == "Edit")
             {
-                var record = person.Records[treeViewRecords.SelectedNode.Parent.Text][treeViewRecords.SelectedNode.Index];
+                var record = m_pPerson.Records[treeViewRecords.SelectedNode.Parent.Text][treeViewRecords.SelectedNode.Index];
                 EditRecordForm erf = new EditRecordForm(record);
                 if (erf.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                 {
-                    person.Records[treeViewRecords.SelectedNode.Parent.Text].RemoveAt(treeViewRecords.SelectedNode.Index);
-                    person.AddRecord(record);
+                    m_pPerson.Records[treeViewRecords.SelectedNode.Parent.Text].RemoveAt(treeViewRecords.SelectedNode.Index);
+                    m_pPerson.AddRecord(record);
                     //person.Records[record.Start.ToString("d")].Add(record);
-                    UpdateForm(person);
+                    UpdateForm(m_pPerson);
                 }
             }
             else if (e.ClickedItem.Text == "Delete")
             {
-                person.Records[treeViewRecords.SelectedNode.Parent.Text].RemoveAt(treeViewRecords.SelectedNode.Index);
-                UpdateForm(person);
+                m_pPerson.Records[treeViewRecords.SelectedNode.Parent.Text].RemoveAt(treeViewRecords.SelectedNode.Index);
+                UpdateForm(m_pPerson);
             }
             else if (e.ClickedItem.Text == "Post to Time Sheet.")
             {
@@ -370,17 +373,17 @@ namespace TimeAssist
 
         private void timerSecondUpdate_Tick(object sender, EventArgs e)
         {
-            if (currentTask != null)
+            if (m_rCurrentRecord != null)
             {
-                var d = DateTime.Now - currentTask.Start;
-                textBox1.Text = string.Format("{0} [{0}:{1}:{2}]", currentTask.Task, d.Hours, d.Minutes, d.Seconds);
+                var d = DateTime.Now - m_rCurrentRecord.Start;
+                textBox1.Text = string.Format("{0} [{1}:{2}:{3}]", m_rCurrentRecord.Task.Length < 40 ? m_rCurrentRecord.Task : m_rCurrentRecord.Task.Substring(0, 40), d.Hours, d.Minutes, d.Seconds);
             }
         }
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (person != null)
-                person.Save();
+            if (m_pPerson != null)
+                m_pPerson.Save();
 
             ShowLoginDialog();
         }
