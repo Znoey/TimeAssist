@@ -49,14 +49,11 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.pieChartControl1 = new TimeAssist.Controls.PieChartControl();
             this.userControl11 = new TimeAssist.Controls.PieChartControl();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buttonStartNewTask = new System.Windows.Forms.Button();
             this.notifyContextMenu.SuspendLayout();
             this.groupBoxCurrentTask.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // notifyIcon
@@ -240,31 +237,11 @@
             this.userControl11.Size = new System.Drawing.Size(267, 238);
             this.userControl11.TabIndex = 6;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.buttonStartNewTask);
-            this.groupBox1.Location = new System.Drawing.Point(12, 100);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(269, 259);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Tasks";
-            // 
-            // buttonStartNewTask
-            // 
-            this.buttonStartNewTask.Location = new System.Drawing.Point(7, 20);
-            this.buttonStartNewTask.Name = "buttonStartNewTask";
-            this.buttonStartNewTask.Size = new System.Drawing.Size(89, 23);
-            this.buttonStartNewTask.TabIndex = 0;
-            this.buttonStartNewTask.Text = "Start New Task";
-            this.buttonStartNewTask.UseVisualStyleBackColor = true;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(588, 384);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.pieChartControl1);
@@ -282,7 +259,6 @@
             this.statusStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,8 +285,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button buttonStartNewTask;
     }
 }
 

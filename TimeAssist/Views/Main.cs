@@ -241,20 +241,6 @@ namespace TimeAssist
 
         #endregion
 
-
-        /// <summary>
-        /// Adds the task to the tree view.
-        /// </summary>
-        /// <param name="task"></param>
-        private string FormatTreeViewString(Record task)
-        {
-            return task.Duration.ToString("F2")
-                + " @"
-                + task.Task 
-                + " #" 
-                + task.Comment;
-        }
-
         /// <summary>
         /// Sets the Finish time for the current record and stores it on our person.
         /// </summary>
@@ -289,6 +275,7 @@ namespace TimeAssist
             }
             else
             {
+                var n = e.Node;
                 if (e.Node.Parent.Parent == null)
                 {
                     DateTime dat = DateTime.Parse(e.Node.Parent.Text);
@@ -298,12 +285,10 @@ namespace TimeAssist
                 {
                     DateTime dat = DateTime.Parse(e.Node.Parent.Parent.Text);
                     pieChartControl1.SetData(m_pPerson.Records[dat.ToString("d")]);
+                    n = e.Node.Parent;
                 }
-                // Copies the comment to the clipbard to post to timesheet.
-                var split = e.Node.Text.Split('#');
-                string comment = split[split.Length - 1];
-                if( comment != null && comment.Length > 0 )
-                    Clipboard.SetText(comment);
+                var record = m_pPerson.Records[n.Parent.Text][n.Index];
+                Clipboard.SetText(record.Comment);
             }
         }
 
@@ -327,11 +312,15 @@ namespace TimeAssist
                 }
                 else if (e.Node.Parent.Parent != null)
                 {
+                    treeViewContextMenu.Show(treeViewRecords.PointToScreen(e.Location));
+                    treeViewRecords.SelectedNode = e.Node.Parent;
                     return;
                 }
-
-                treeViewContextMenu.Show( treeViewRecords.PointToScreen(e.Location) );
-                treeViewRecords.SelectedNode = e.Node;
+                else
+                {
+                    treeViewContextMenu.Show(treeViewRecords.PointToScreen(e.Location));
+                    treeViewRecords.SelectedNode = e.Node;
+                }
             }
         }
 
@@ -339,11 +328,8 @@ namespace TimeAssist
         {
             if (e.ClickedItem.Text == "Copy Comment")
             {
-                // Copies the comment to the clipbard to post to timesheet.
-                var split = treeViewRecords.SelectedNode.Text.Split('#');
-                string comment = split[split.Length - 1];
-                if (comment != null && comment.Length > 0)
-                    Clipboard.SetText(comment);
+                var record = m_pPerson.Records[treeViewRecords.SelectedNode.Parent.Text][treeViewRecords.SelectedNode.Index];
+                Clipboard.SetText(record.Comment);
             }
             else if (e.ClickedItem.Text == "Edit")
             {
