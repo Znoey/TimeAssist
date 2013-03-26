@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBoxTaskList = new System.Windows.Forms.GroupBox();
-            this.buttonNewTask = new System.Windows.Forms.Button();
             this.panelListView = new System.Windows.Forms.Panel();
+            this.buttonNewTask = new System.Windows.Forms.Button();
             this.groupBoxTaskList.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,8 +46,20 @@
             this.groupBoxTaskList.TabStop = false;
             this.groupBoxTaskList.Text = "Task List";
             // 
+            // panelListView
+            // 
+            this.panelListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelListView.Location = new System.Drawing.Point(7, 50);
+            this.panelListView.Name = "panelListView";
+            this.panelListView.Size = new System.Drawing.Size(216, 225);
+            this.panelListView.TabIndex = 1;
+            // 
             // buttonNewTask
             // 
+            this.buttonNewTask.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonNewTask.Location = new System.Drawing.Point(7, 20);
             this.buttonNewTask.Name = "buttonNewTask";
             this.buttonNewTask.Size = new System.Drawing.Size(75, 23);
@@ -55,15 +67,6 @@
             this.buttonNewTask.Text = "New Task";
             this.buttonNewTask.UseVisualStyleBackColor = true;
             this.buttonNewTask.Click += new System.EventHandler(this.buttonNewTask_Click);
-            // 
-            // panelListView
-            // 
-            this.panelListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelListView.Location = new System.Drawing.Point(7, 50);
-            this.panelListView.Name = "panelListView";
-            this.panelListView.Size = new System.Drawing.Size(216, 225);
-            this.panelListView.TabIndex = 1;
             // 
             // TaskListControl
             // 

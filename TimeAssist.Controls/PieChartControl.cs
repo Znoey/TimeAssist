@@ -29,7 +29,7 @@ namespace TimeAssist.Controls
         {
             InitializeComponent();
             ResetPens();
-            this.MinimumSize = new Size(pieRect.Height, pieRect.Width * 2);
+            this.MinimumSize = new Size(pieRect.Width * 2, pieRect.Height);
         }
 
         private void ResetPens()
@@ -84,11 +84,14 @@ namespace TimeAssist.Controls
             PointF pt = new PointF(legendRect.X, legendRect.Y);
             e.Graphics.FillRectangle(Brushes.White, new RectangleF(pt.X, pt.Y, Size.Width - pt.X, Size.Height));
 
+            var darker = new Pen(Brushes.DimGray);
+            darker.Width = 1;
             for (int i = 0; i < recordsToDraw.Count; i++ )
             {
                 sweepAngle = recordsToDraw[i].Duration * HourAngleSize;
                 startAngle = GetStartAngle(recordsToDraw[i]);
                 e.Graphics.FillPie(GetPieChartBrush(i), pieRect, startAngle, sweepAngle);
+                e.Graphics.DrawPie(darker, pieRect, startAngle, sweepAngle);
                 startAngle += sweepAngle;
 
                 e.Graphics.DrawString(recordsToDraw[i].Task, Font, Brushes.Black, new PointF(pt.X + 1, pt.Y + 1));

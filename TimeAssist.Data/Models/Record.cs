@@ -35,6 +35,30 @@ namespace TimeAssist
         }
 
         /// <summary>
+        /// Returns the duration of time this task was worked on as a TimeSpan object.
+        /// </summary>
+        public TimeSpan DurationTimeSpan
+        {
+            get
+            {
+                StartTimeProperty stp = Find<StartTimeProperty>();
+                FinishTimeProperty ftp = Find<FinishTimeProperty>();
+                if (stp != null && ftp != null)
+                {
+                    return stp.Data - ftp.Data;
+                }
+                else if (stp != null && ftp == null)
+                {
+                    return stp.Data - DateTime.Now;
+                }
+                else
+                {
+                    return new TimeSpan();
+                }
+            }
+        }
+
+        /// <summary>
         /// get or set the value for when this task was started.
         /// </summary>
         public DateTime Start

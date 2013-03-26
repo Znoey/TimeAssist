@@ -11,8 +11,10 @@ namespace TimeAssist.Controls
 {
     public partial class TaskListControl : UserControl
     {
-        public const int RecordPanelHeight = 32;
+        public delegate void FinishRecord(Record r);
+        public event FinishRecord OnRecordFinished;
 
+        
         List<Record> recordList = new List<Record>();
 
         public TaskListControl()
@@ -37,27 +39,42 @@ namespace TimeAssist.Controls
         private void buttonNewTask_Click(object sender, EventArgs e)
         {
             var r = new Record();
-            AddRecord(r);
             panelListView.Controls.Add(RecordViewer(r));
+            panelListView.AutoScroll = true;
         }
 
-        private Control RecordViewer(Record r)
+        private ShortRecordView RecordViewer(Record r)
         {
-            Panel p = new Panel();
-            p.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            p.Size = new System.Drawing.Size(panelListView.Width, RecordPanelHeight);
-            p.Location = new Point(0, recordList.Count * RecordPanelHeight);
-            TextBox duration = new TextBox();
-            TextBox task = new TextBox();
-            Button addComment = new Button();
-            Button end = new Button();
+            ShortRecordView view = new ShortRecordView(r);
+            view.Name = "RecordView_" + recordList.Count;
+            view.Width = panelListView.Width;
+            view.OnEndClicked += new ShortRecordView.CloseControl(view_OnEndClicked);
+            view.Location = new Point(0, recordList.Count * view.Height);
+            AddRecord(r);
+            return view;
+        }
 
-            p.Controls.Add(duration);
-            p.Controls.Add(task);
-            p.Controls.Add(addComment);
-            p.Controls.Add(end);
+        void view_OnEndClicked(object sender, EventArgs e)
+        {
+            ShortRecordView view = sender as ShortRecordView;
+            int index = int.Parse(view.Name.Split('_')[1]);
+            
+            if( OnRecordFinished != null ) OnRecordFinished(recordList[index]);
 
-            return p;
+            panelListView.Controls.RemoveAt(index);
+            RemoveRecordAt(index);
+            // TODO: Shift the other controls up.
+            for (int i = 0, y = 0, c = 0; i < panelListView.Controls.Count; i++)
+            {
+                var control = panelListView.Controls[i] as ShortRecordView;
+                if (control != null)
+                {
+                    control.Location = new Point(0, y);
+                    control.Name = "RecordView_" + c.ToString();
+                    y += control.Height;
+                    c++;
+                }
+            }
         }
 
 
