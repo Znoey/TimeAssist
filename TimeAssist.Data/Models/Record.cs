@@ -372,5 +372,15 @@ namespace TimeAssist
             else
                 return -1;
         }
+
+        public void RemoveProperty<T1>()
+        {
+            properties.Remove( properties.Find( x => x.GetType() == typeof(T1) ) );
+        }
+
+        public void RemoveAllProperty<T1>() where T1 : AProperty
+        {
+            properties.RemoveAll(x => x.GetType() == typeof(T1));
+        }
     }
 }

@@ -38,8 +38,7 @@ namespace TimeAssist.Controls
 
         private void textboxComment_TextChanged(object sender, EventArgs e)
         {
-            r.Comment = "";
-            r.properties.RemoveAll(x => x.GetType() == typeof(TimeAssist.Data.Property.CommentProperty));
+            r.RemoveAllProperty<TimeAssist.Data.Property.CommentProperty>();
             r.Comment = textboxComment.Text.Trim();
         }
 

@@ -72,7 +72,7 @@
             this.dateTimePickerFinish.Location = new System.Drawing.Point(72, 29);
             this.dateTimePickerFinish.Name = "dateTimePickerFinish";
             this.dateTimePickerFinish.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePickerFinish.TabIndex = 0;
+            this.dateTimePickerFinish.TabIndex = 1;
             // 
             // labelTask
             // 
@@ -88,7 +88,7 @@
             this.textBoxTask.Location = new System.Drawing.Point(72, 56);
             this.textBoxTask.Name = "textBoxTask";
             this.textBoxTask.Size = new System.Drawing.Size(200, 20);
-            this.textBoxTask.TabIndex = 3;
+            this.textBoxTask.TabIndex = 2;
             // 
             // buttonApply
             // 
@@ -107,7 +107,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(116, 227);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 4;
+            this.buttonCancel.TabIndex = 5;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
@@ -125,7 +125,7 @@
             this.textBoxComment.Location = new System.Drawing.Point(15, 101);
             this.textBoxComment.Name = "textBoxComment";
             this.textBoxComment.Size = new System.Drawing.Size(257, 120);
-            this.textBoxComment.TabIndex = 5;
+            this.textBoxComment.TabIndex = 3;
             this.textBoxComment.Text = "";
             // 
             // EditRecordForm

@@ -30,8 +30,9 @@ namespace TimeAssist.Views
         {
             record.Start = dateTimePickerStart.Value;
             record.Finish = dateTimePickerFinish.Value;
-            record.Task = textBoxTask.Text;
-            record.Comment = textBoxComment.Text;
+            record.Task = textBoxTask.Text.Trim();
+            record.RemoveAllProperty<Data.Property.CommentProperty>();
+            record.Comment = textBoxComment.Text.Trim();
 
             if (OnApplyClicked != null) OnApplyClicked(sender, e);
 
