@@ -26,7 +26,9 @@ namespace TimeAssist.Controls
         {
             InitializeComponent();
             this.r = r;
-            textboxDuration.Text = string.Format("{0}:{1}", r.DurationTimeSpan.Hours, r.DurationTimeSpan.Minutes);
+            var d = r.DurationTimeSpan;
+            textboxDuration.Text = string.Format("{0}:{1}:{2}", d.Hours, d.Minutes, d.Seconds);
+            updateTimer.Start();
         }
 
         private void textboxTask_TextChanged(object sender, EventArgs e)
@@ -44,12 +46,23 @@ namespace TimeAssist.Controls
         private void buttonEnd_Click(object sender, EventArgs e)
         {
             r.Finish = DateTime.Now;
+            if (string.IsNullOrEmpty(r.Task))
+                r.Task = "not specified";
+            if (string.IsNullOrEmpty(r.Comment))
+                r.Comment = "no comments added.";
             if (OnEndClicked != null) OnEndClicked(this, new EventArgs());
         }
 
-        private void seconds_Tick(object sender, EventArgs e)
+        private void buttonPause_Click(object sender, EventArgs e)
         {
-            textboxDuration.Text = string.Format("{0}:{1}", r.DurationTimeSpan.Hours, r.DurationTimeSpan.Minutes);
+
         }
+
+        private void Tick(object sender, EventArgs e)
+        {
+            var d = r.DurationTimeSpan;
+            textboxDuration.Text = string.Format("{0}:{1}:{2}", d.Hours, d.Minutes, d.Seconds);
+        }
+
     }
 }

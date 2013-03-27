@@ -37,10 +37,19 @@ namespace TimeAssist
             notifyIcon.Visible = true;
             notifyIcon.MouseDoubleClick += new MouseEventHandler(notifyIcon_MouseDoubleClick);
 
+
             m_lCurrent = new List<Record>();
+
+            taskListControl.OnRecordFinished += new TimeAssist.Controls.TaskListControl.FinishRecord(taskListControl_OnRecordFinished);
             // record control
             //recordControl.OnStartClicked += new Action(recordControl_OnStartClicked);
             //recordControl.OnFinishClicked += new Action(recordControl_OnFinishClicked);
+        }
+
+        void taskListControl_OnRecordFinished(Record r)
+        {
+            m_pPerson.AddRecord(r);
+            UpdateForm(m_pPerson);
         }
 
         void recordControl_OnFinishClicked()
@@ -129,9 +138,11 @@ namespace TimeAssist
             {
                 // Handle all records.
                 treeViewRecords.Nodes.Clear();
+                TreeNode node;
+                TreeNode record = new TreeNode();
                 foreach (var key in p.Records.Keys)
                 {
-                    var node = treeViewRecords.Nodes.Add(key.ToString());
+                    node = treeViewRecords.Nodes.Add(key.ToString());
                     List<Record> sorted = new List<Record>(p.Records[key].ToArray());
                     sorted.Sort((Record a, Record b) =>
                         {
@@ -139,7 +150,7 @@ namespace TimeAssist
                         });
                     foreach (var task in sorted)
                     {
-                        TreeNode record = new TreeNode();
+                        record = new TreeNode();
                         record.Text = task.Duration.ToString("F2") + " - " + task.Task;
                         foreach (var item in task.properties)
                         {
@@ -148,6 +159,7 @@ namespace TimeAssist
                         node.Nodes.Add(record);
                     }
                 }
+                if( record != null ) treeViewRecords.SelectedNode = record;
             }
         }
 
@@ -288,7 +300,8 @@ namespace TimeAssist
                     n = e.Node.Parent;
                 }
                 var record = m_pPerson.Records[n.Parent.Text][n.Index];
-                Clipboard.SetText(record.Comment);
+                if( record != null &&  string.IsNullOrEmpty( record.Comment ) == false)
+                    Clipboard.SetText(record.Comment);
             }
         }
 

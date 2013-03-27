@@ -39,6 +39,7 @@ namespace TimeAssist.Controls
         private void buttonNewTask_Click(object sender, EventArgs e)
         {
             var r = new Record();
+            r.Start = DateTime.Now;
             panelListView.Controls.Add(RecordViewer(r));
             panelListView.AutoScroll = true;
         }

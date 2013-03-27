@@ -47,9 +47,9 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.taskListControl = new TimeAssist.Controls.TaskListControl();
             this.pieChartControl1 = new TimeAssist.Controls.PieChartControl();
             this.userControl11 = new TimeAssist.Controls.PieChartControl();
-            this.taskListControl1 = new TimeAssist.Controls.TaskListControl();
             this.notifyContextMenu.SuspendLayout();
             this.groupBoxCurrentTask.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -220,6 +220,15 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // taskListControl
+            // 
+            this.taskListControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.taskListControl.Location = new System.Drawing.Point(12, 100);
+            this.taskListControl.Name = "taskListControl";
+            this.taskListControl.Size = new System.Drawing.Size(268, 259);
+            this.taskListControl.TabIndex = 9;
+            // 
             // pieChartControl1
             // 
             this.pieChartControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -239,19 +248,12 @@
             this.userControl11.Size = new System.Drawing.Size(267, 238);
             this.userControl11.TabIndex = 6;
             // 
-            // taskListControl1
-            // 
-            this.taskListControl1.Location = new System.Drawing.Point(12, 100);
-            this.taskListControl1.Name = "taskListControl1";
-            this.taskListControl1.Size = new System.Drawing.Size(268, 259);
-            this.taskListControl1.TabIndex = 9;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(588, 384);
-            this.Controls.Add(this.taskListControl1);
+            this.Controls.Add(this.taskListControl);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.pieChartControl1);
@@ -295,7 +297,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private Controls.TaskListControl taskListControl1;
+        private Controls.TaskListControl taskListControl;
     }
 }
 

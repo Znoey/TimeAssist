@@ -45,11 +45,11 @@ namespace TimeAssist
                 FinishTimeProperty ftp = Find<FinishTimeProperty>();
                 if (stp != null && ftp != null)
                 {
-                    return stp.Data - ftp.Data;
+                    return ftp.Data - stp.Data;
                 }
                 else if (stp != null && ftp == null)
                 {
-                    return stp.Data - DateTime.Now;
+                    return DateTime.Now - stp.Data;
                 }
                 else
                 {
