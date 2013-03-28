@@ -205,5 +205,45 @@ namespace TimeAssist
         }
 
         #endregion
+
+        public string GetDaysWorthComments(DateTime day)
+        {
+            StringBuilder str = new StringBuilder();
+            if (!records.ContainsKey(day.ToString("d")))
+            {
+                str.AppendLine(day.DayOfWeek.ToString());
+                str.AppendLine("");
+                return str.ToString();
+            }
+            var dayList = Records[day.ToString("d")];
+            str.AppendLine(day.DayOfWeek.ToString());
+            foreach (var r in dayList)
+            {
+                str.AppendLine(r.Task + ": " + r.Comment);
+            }
+            str.AppendLine("");
+            return str.ToString();
+        }
+        public string GetWeeksWorthComments(DateTime dayInWeek)
+        {
+            StringBuilder str = new StringBuilder();
+            DateTime firstDay = dayInWeek;
+            int terminator = 31;
+            while (firstDay.DayOfWeek != DayOfWeek.Monday)
+            {
+                firstDay = firstDay.AddDays(-1) ;
+            }
+            if (terminator < 0)
+            {
+                return null;
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                str.Append(GetDaysWorthComments(firstDay));
+                firstDay = firstDay.AddDays(1);
+            }
+
+            return str.ToString();
+        }
     }
 }

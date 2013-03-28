@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using TimeAssist.Views;
+using System.Text;
 
 namespace TimeAssist
 {
@@ -312,6 +313,8 @@ namespace TimeAssist
             {
                 treeViewContextMenu = new ContextMenuStrip();
                 treeViewContextMenu.Items.Add("Copy Comment");
+                treeViewContextMenu.Items.Add("Copy Days Comment");
+                treeViewContextMenu.Items.Add("Copy Weeks Comment");
                 treeViewContextMenu.Items.Add("Edit");
                 treeViewContextMenu.Items.Add("Delete");
                 treeViewContextMenu.Items.Add("Post to Time Sheet.");
@@ -364,6 +367,16 @@ namespace TimeAssist
             else if (e.ClickedItem.Text == "Post to Time Sheet.")
             {
 
+            }
+            else if (e.ClickedItem.Text == "Copy Days Comment")
+            {
+                Clipboard.SetText(m_pPerson.GetDaysWorthComments(
+                    DateTime.Parse(treeViewRecords.SelectedNode.Parent.Text)));
+            }
+            else if (e.ClickedItem.Text == "Copy Weeks Comment")
+            {
+                Clipboard.SetText(m_pPerson.GetWeeksWorthComments(
+                    DateTime.Parse(treeViewRecords.SelectedNode.Parent.Text)));
             }
             treeViewContextMenu.Hide();
         }
