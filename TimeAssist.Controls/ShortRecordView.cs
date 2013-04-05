@@ -54,7 +54,7 @@ namespace TimeAssist.Controls
 
         private void buttonPause_Click(object sender, EventArgs e)
         {
-
+            // TODO: I'd like some way to pause a task if work has become "idle" on it.
         }
 
         private void Tick(object sender, EventArgs e)

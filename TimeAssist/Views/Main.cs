@@ -130,50 +130,6 @@ namespace TimeAssist
             UpdateForm(m_pPerson);
         }
 
-        private void UpdateForm(Person p)
-        {
-            // TODO: Add the ability to update both the today element and 
-            //      the record stack of elements.
-
-            if (p.Records.Count > 0)
-            {
-                // Handle all records.
-                treeViewRecords.Nodes.Clear();
-                TreeNode node;
-                TreeNode record = new TreeNode();
-                foreach (var key in p.Records.Keys)
-                {
-                    node = treeViewRecords.Nodes.Add(key.ToString());
-                    List<Record> sorted = new List<Record>(p.Records[key].ToArray());
-                    sorted.Sort((Record a, Record b) =>
-                        {
-                            return a.Start.CompareTo(b.Start);
-                        });
-                    foreach (var task in sorted)
-                    {
-                        record = new TreeNode();
-                        record.Text = task.Duration.ToString("F2") + " - " + task.Task;
-                        foreach (var item in task.properties)
-                        {
-                            record.Nodes.Add(item.GetType().Name + " - " + item.Data.ToString());
-                        }
-                        node.Nodes.Add(record);
-                    }
-                }
-                if( record != null ) treeViewRecords.SelectedNode = record;
-            }
-        }
-
-        /// <summary>
-        /// Displays the login dialog to the user.
-        /// </summary>
-        private void ShowLoginDialog()
-        {
-            m_dlgLogin = new LoginForm();
-            m_dlgLogin.Show(this);
-            m_dlgLogin.FormClosing += new FormClosingEventHandler(dlgLogin_FormClosing);
-        }
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
@@ -190,61 +146,17 @@ namespace TimeAssist
         }
 
 
-        private void OnClickAddTask(object sender, EventArgs e)
-        {
-            AddTask dlgAddTask = new AddTask();
-            dlgAddTask.Text = "Start a New Task.";
-            if (dlgAddTask.ShowDialog() == DialogResult.OK)
-            {
-                m_rCurrentRecord = new Record();
-                m_rCurrentRecord.Start = dlgAddTask.RecordInfo.Start;
-                m_rCurrentRecord.Finish = dlgAddTask.RecordInfo.Finish;
-                m_rCurrentRecord.Task = dlgAddTask.RecordInfo.Task;
-                m_rCurrentRecord.Comment = dlgAddTask.RecordInfo.Comment;
-                textBox1.Text = m_rCurrentRecord.Task;
-            }
-        }
-
-        private void OnClickFinishTask(object sender, EventArgs e)
-        {
-            if (m_rCurrentRecord != null)
-            {
-                AddTask dlgAddTask = new AddTask();
-                dlgAddTask.Text = "Finish Current Task.";
-                dlgAddTask.RecordInfo = m_rCurrentRecord;
-                dlgAddTask.Comment = m_rCurrentRecord.Comment;
-                dlgAddTask.Task = m_rCurrentRecord.Task;
-                dlgAddTask.ButtonText = "Finish Task";
-                if (dlgAddTask.ShowDialog() == DialogResult.OK)
-                {
-                    m_rCurrentRecord.Task = dlgAddTask.Task;
-                    m_rCurrentRecord.Comment = dlgAddTask.Comment;
-                    m_rCurrentRecord.Finish = DateTime.Now;
-                    m_pPerson.AddRecord(m_rCurrentRecord);
-                    UpdateForm(m_pPerson);
-                    m_rCurrentRecord = null;
-                    textBox1.Text = "No Current Task.";
-                    return;
-                }
-            }
-            else
-            {
-                OnClickAddTask(this, new EventArgs());
-            }
-        }
-
-
 
         #region Context Menu hooks 
 
         private void menuStartTask_Click(object sender, EventArgs e)
         {
-            OnClickAddTask(sender, e);
+            //OnClickAddTask(sender, e);
         }
 
         private void finishTaskToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OnClickFinishTask(sender, e);
+            //OnClickFinishTask(sender, e);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -254,20 +166,8 @@ namespace TimeAssist
 
         #endregion
 
-        /// <summary>
-        /// Sets the Finish time for the current record and stores it on our person.
-        /// </summary>
-        private void FinishOffCurrentTask()
-        {
-            if (m_rCurrentRecord != null)
-            {
-                // TODO: Finish off the current task first;
-                m_rCurrentRecord.Finish = DateTime.Now;
-                m_pPerson.AddRecord(m_rCurrentRecord);
-                m_rCurrentRecord = null;
-            }
-        }
-
+        #region Button Clicks
+        
         private void buttonStart_Click(object sender, EventArgs e)
         {
             m_rCurrentRecord.Start = m_rCurrentRecord.Finish = DateTime.Now;
@@ -277,6 +177,9 @@ namespace TimeAssist
         {
             m_rCurrentRecord.Finish = DateTime.Now;
         }
+
+        #endregion
+
         #region treeViewRecords Events
 
         private void treeViewRecords_AfterSelect(object sender, TreeViewEventArgs e)
@@ -383,14 +286,7 @@ namespace TimeAssist
 
         #endregion
 
-        private void timerSecondUpdate_Tick(object sender, EventArgs e)
-        {
-            if (m_rCurrentRecord != null)
-            {
-                var d = DateTime.Now - m_rCurrentRecord.Start;
-                textBox1.Text = string.Format("{0} [{1}:{2}:{3}]", m_rCurrentRecord.Task.Length < 40 ? m_rCurrentRecord.Task : m_rCurrentRecord.Task.Substring(0, 40), d.Hours, d.Minutes, d.Seconds);
-            }
-        }
+        #region ToolStrip menu hooks
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -398,6 +294,78 @@ namespace TimeAssist
                 m_pPerson.Save();
 
             ShowLoginDialog();
+        }
+
+        #endregion
+
+        #region Utilities
+
+        /// <summary>
+        /// Displays the login dialog to the user.
+        /// </summary>
+        private void ShowLoginDialog()
+        {
+            m_dlgLogin = new LoginForm();
+            m_dlgLogin.Show(this);
+            m_dlgLogin.FormClosing += new FormClosingEventHandler(dlgLogin_FormClosing);
+        }
+
+        /// <summary>
+        /// Sets the Finish time for the current record and stores it on our person.
+        /// </summary>
+        private void FinishOffCurrentTask()
+        {
+            if (m_rCurrentRecord != null)
+            {
+                // TODO: Finish off the current task first;
+                m_rCurrentRecord.Finish = DateTime.Now;
+                m_pPerson.AddRecord(m_rCurrentRecord);
+                m_rCurrentRecord = null;
+            }
+        }
+
+
+        private void UpdateForm(Person p)
+        {
+            // TODO: Add the ability to update both the today element and 
+            //      the record stack of elements.
+
+            if (p.Records.Count > 0)
+            {
+                // Handle all records.
+                treeViewRecords.Nodes.Clear();
+                TreeNode node;
+                TreeNode record = new TreeNode();
+                foreach (var key in p.Records.Keys)
+                {
+                    node = treeViewRecords.Nodes.Add(key.ToString());
+                    List<Record> sorted = new List<Record>(p.Records[key].ToArray());
+                    sorted.Sort((Record a, Record b) =>
+                    {
+                        return a.Start.CompareTo(b.Start);
+                    });
+                    foreach (var task in sorted)
+                    {
+                        record = new TreeNode();
+                        record.Text = task.Duration.ToString("F2") + " - " + task.Task;
+                        foreach (var item in task.properties)
+                        {
+                            record.Nodes.Add(item.GetType().Name + " - " + item.Data.ToString());
+                        }
+                        node.Nodes.Add(record);
+                    }
+                }
+                if (record != null) treeViewRecords.SelectedNode = record;
+            }
+        }
+
+
+        #endregion
+
+        private void webDialogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WebRequestDialog dlg = new WebRequestDialog();
+            dlg.Show();
         }
     }
 }

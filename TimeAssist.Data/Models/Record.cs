@@ -382,5 +382,10 @@ namespace TimeAssist
         {
             properties.RemoveAll(x => x.GetType() == typeof(T1));
         }
+
+        public void RemoveAt(int index)
+        {
+            properties.RemoveAt(index);
+        }
     }
 }
