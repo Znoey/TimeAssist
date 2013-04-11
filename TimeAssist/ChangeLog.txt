@@ -1,5 +1,7 @@
 ﻿TimeAssist Change Log
 
+this is some new text.
+
 TOC
 1.) History
 2.) Planned Features
