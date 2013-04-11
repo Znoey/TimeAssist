@@ -25,6 +25,7 @@ namespace TimeAssist.Views
         {
             InitializeComponent();
             threadData.logMethod = Log;
+            threadData.setWebDoc = SetBrowserDocument;
             webClient = new WebClient();
         }
 
@@ -82,10 +83,25 @@ namespace TimeAssist.Views
             }
         }
 
+        public delegate void SetBrowserCallback(Uri document);
+        public void SetBrowserDocument(Uri document)
+        {
+            if (this.webBrowser.InvokeRequired)
+            {
+                SetBrowserCallback d = new SetBrowserCallback(SetBrowserDocument);
+                this.Invoke(d, new object[] { document });
+            }
+            else
+            {
+                this.webBrowser.Url = document;
+            }
+        }
+
 
         public static string URL;
         public static string RESPONSE;
         public static ThreadData threadData = new ThreadData();
+        public static string PROCESS_LOGIN = "http://192.168.40.116/timesheet/processlogin.asp";
         public static void ThreadGet()
         {
             //WebGet(URL);
@@ -93,7 +109,7 @@ namespace TimeAssist.Views
             d.Add("inUser", "93");
             d.Add("inPassword", "johnr");
             d.Add("btnSubmit", "Login");
-            WebPost("http://192.168.40.116/timesheet/processlogin.asp", d);
+            WebPost(PROCESS_LOGIN, d);
         }
 
         private static void WebGet(string url)
@@ -118,9 +134,16 @@ namespace TimeAssist.Views
         private static void WebPost(string url, Dictionary<string, string> data)
         {
             threadData.logMethod("Starting POST Request...");
-            WebRequest request = WebRequest.Create(url);
+            HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
+            request.AllowAutoRedirect = true;
+            //request.
             request.Credentials = CredentialCache.DefaultCredentials;
             request.Method = "POST";
+
+            request.Headers.Add("User-Agent", "Opera/9.8 (Windows NT 6.1; WOW64) Presto/2.12.388 Version/12.14");
+            request.Headers.Add(HttpResponseHeader.Connection, "Keep-Alive");
+            request.Headers.Add(HttpResponseHeader.ContentType, "application/x-www-form-urlencoded");
+            request.Headers.Add(HttpResponseHeader.AcceptRanges, "text/html");
 
             var requestStream = request.GetRequestStream();
             StreamWriter writer = new StreamWriter(requestStream);
@@ -141,11 +164,11 @@ namespace TimeAssist.Views
             threadData.logMethod("Getting Response");
             WebResponse response = request.GetResponse();
             threadData.logMethod(((HttpWebResponse)response).StatusDescription);
-            threadData.logMethod("Printing Datastream");
             Stream dataStream = response.GetResponseStream();
             StreamReader reader = new StreamReader(dataStream);
 
-            threadData.logMethod(reader.ReadToEnd());
+
+            threadData.setWebDoc(response.ResponseUri);
             reader.Close();
             response.Close();
         }
@@ -170,7 +193,8 @@ namespace TimeAssist.Views
             Stream dataStream = response.GetResponseStream();
             StreamReader reader = new StreamReader(dataStream);
 
-            threadData.logMethod(reader.ReadToEnd());
+            //threadData.logMethod(reader.ReadToEnd());
+            threadData.setWebDoc(response.ResponseUri);
             reader.Close();
             response.Close();
         }
@@ -180,6 +204,7 @@ namespace TimeAssist.Views
         {
             public System.Action<string> logMethod;
             public System.Action<string> onThreadFinished;
+            public System.Action<Uri> setWebDoc;
         }
     }
 }

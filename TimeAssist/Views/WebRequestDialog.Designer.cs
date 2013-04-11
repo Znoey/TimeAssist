@@ -31,16 +31,15 @@
             this.textboxRespose = new System.Windows.Forms.RichTextBox();
             this.buttonPost = new System.Windows.Forms.Button();
             this.textboxURI = new System.Windows.Forms.RichTextBox();
+            this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.SuspendLayout();
             // 
             // textboxRespose
             // 
-            this.textboxRespose.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textboxRespose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textboxRespose.Location = new System.Drawing.Point(13, 84);
             this.textboxRespose.Name = "textboxRespose";
-            this.textboxRespose.Size = new System.Drawing.Size(259, 166);
+            this.textboxRespose.Size = new System.Drawing.Size(547, 49);
             this.textboxRespose.TabIndex = 0;
             this.textboxRespose.Text = "";
             // 
@@ -50,7 +49,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonPost.Location = new System.Drawing.Point(197, 55);
             this.buttonPost.Name = "buttonPost";
-            this.buttonPost.Size = new System.Drawing.Size(75, 23);
+            this.buttonPost.Size = new System.Drawing.Size(363, 23);
             this.buttonPost.TabIndex = 1;
             this.buttonPost.Text = "Request";
             this.buttonPost.UseVisualStyleBackColor = true;
@@ -62,15 +61,26 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textboxURI.Location = new System.Drawing.Point(12, 12);
             this.textboxURI.Name = "textboxURI";
-            this.textboxURI.Size = new System.Drawing.Size(260, 34);
+            this.textboxURI.Size = new System.Drawing.Size(548, 34);
             this.textboxURI.TabIndex = 0;
             this.textboxURI.Text = "http://192.168.40.116/timesheet";
+            // 
+            // webBrowser
+            // 
+            this.webBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.webBrowser.Location = new System.Drawing.Point(13, 139);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser.Name = "webBrowser";
+            this.webBrowser.Size = new System.Drawing.Size(547, 465);
+            this.webBrowser.TabIndex = 2;
             // 
             // WebRequestDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(572, 616);
+            this.Controls.Add(this.webBrowser);
             this.Controls.Add(this.buttonPost);
             this.Controls.Add(this.textboxURI);
             this.Controls.Add(this.textboxRespose);
@@ -85,5 +95,6 @@
         private System.Windows.Forms.RichTextBox textboxRespose;
         private System.Windows.Forms.Button buttonPost;
         private System.Windows.Forms.RichTextBox textboxURI;
+        private System.Windows.Forms.WebBrowser webBrowser;
     }
 }
